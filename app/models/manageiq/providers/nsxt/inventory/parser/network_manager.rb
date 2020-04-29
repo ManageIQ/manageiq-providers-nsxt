@@ -22,12 +22,12 @@ class ManageIQ::Providers::Nsxt::Inventory::Parser::NetworkManager < ManageIQ::P
       network_service_entry = persister.network_service_entries.find_or_build(id)
       network_service_entry.name = service_entry['display_name']
       network_service_entry.network_service = persister.network_services.lazy_find(service['id'])
-      if service_entry['resource_type'] == 'L4PortSetServiceEntry'  
-        network_service_entry.protocol = service_entry['l4_protocol'] 
+      if service_entry['resource_type'] == 'L4PortSetServiceEntry'
+        network_service_entry.protocol = service_entry['l4_protocol']
         network_service_entry.source_ports = network_service_entry_ports(service_entry['source_ports'])
         network_service_entry.destination_ports = network_service_entry_ports(service_entry['destination_ports'])
       else
-        network_service_entry.protocol = service_entry['protocol'] 
+        network_service_entry.protocol = service_entry['protocol']
       end
     end
   end
@@ -72,12 +72,14 @@ class ManageIQ::Providers::Nsxt::Inventory::Parser::NetworkManager < ManageIQ::P
       cloud_subnet.dhcp_enabled = false
       cloud_subnet.cloud_network = persister.cloud_networks.lazy_find(segment['id'])
       cloud_subnet.network_router = persister.network_routers.lazy_find(network_router_id)
-      network_ports(segment, cloud_subnet)
+
+      # TODO: this depends on vm.instance_uuid which doesn't exist yet
+      # network_ports(segment, cloud_subnet)
     end
   end
 
   def network_ports(segment, cloud_subnet)
-    Lan.where(:ems_ref => segment['id']).each do |lan| 
+    Lan.where(:ems_ref => segment['id']).each do |lan|
       lan.vms.each do |vm|
         return if cloud_subnet.cloud_tenant.nil?
         return if vm.tenant_id != cloud_subnet.cloud_tenant.source_tenant.id
@@ -107,16 +109,17 @@ class ManageIQ::Providers::Nsxt::Inventory::Parser::NetworkManager < ManageIQ::P
   def security_groups_network_ports(security_group)
     group_members = collector.group_members(security_group.ems_ref)
     group_members.each do |group_member|
-      vm = Vm.find_by(:instance_uuid => group_member['id'])
-      next if vm.nil?
-      network_port = persister.network_ports.find_or_build(group_member['id'])
-      network_port.name = group_member['display_name']
-      network_port.cloud_tenant = security_group.cloud_tenant
-      network_port.status = 'active'
-      network_port.device = vm
-      network_port.device_ref = group_member['id']
-      network_port.security_groups = [] if network_port.security_groups.nil?
-      network_port.security_groups << security_group
+      # TODO: This depends on vm.instance_uuid which doesn't exist yet
+      # vm = Vm.find_by(:instance_uuid => group_member['id'])
+      # next if vm.nil?
+      # network_port = persister.network_ports.find_or_build(group_member['id'])
+      # network_port.name = group_member['display_name']
+      # network_port.cloud_tenant = security_group.cloud_tenant
+      # network_port.status = 'active'
+      # network_port.device = vm
+      # network_port.device_ref = group_member['id']
+      # network_port.security_groups = [] if network_port.security_groups.nil?
+      # network_port.security_groups << security_group
     end
   end
 
@@ -164,7 +167,8 @@ class ManageIQ::Providers::Nsxt::Inventory::Parser::NetworkManager < ManageIQ::P
     end
   end
 
-  private 
+  private
+
   def get_tag_value_by_scope(tags, scope)
     tag = tags&.find { |t| t['scope'].upcase == scope.upcase }
     return nil if tag.nil?
@@ -174,6 +178,7 @@ class ManageIQ::Providers::Nsxt::Inventory::Parser::NetworkManager < ManageIQ::P
   def cloud_tenant(tags)
     cloud_tenant_tag = get_tag_value_by_scope(tags, 'tenant')
     return nil if cloud_tenant_tag.nil?
+
     cloud_tenant_id = cloud_tenant_tag.upcase
     cloud_tenant = persister.cloud_tenants.find_or_build(cloud_tenant_id)
     cloud_tenant.name = cloud_tenant_id
