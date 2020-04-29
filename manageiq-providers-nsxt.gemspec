@@ -6,7 +6,7 @@ Gem::Specification.new do |s|
   s.name        = "manageiq-providers-nsxt"
   s.version     = ManageIQ::Providers::Nsxt::VERSION
   s.authors     = ["ManageIQ Developers"]
-  s.homepage    = "https://gitlab.vipernext.kpn.org/vnx/manageiq-providers-nsxt"
+  s.homepage    = "https://github.com/ManageIQ/manageiq-providers-nsxt"
   s.summary     = "NSX-T Provider for ManageIQ"
   s.description = "NSX-T Provider for ManageIQ"
   s.licenses    = ["Apache-2.0"]
