@@ -29,7 +29,7 @@ module ManageIQ::Providers::Nsxt::ManagerMixin
   end
 
   def base_url(protocol, server, port)
-    scheme = %w(ssl ssl-with-validation).include?(protocol) ? "https" : "http"
+    scheme = %w[ssl ssl-with-validation].include?(protocol) ? "https" : "http"
     URI::Generic.build(:scheme => scheme, :host => server, :port => port).to_s
   end
 
@@ -54,7 +54,6 @@ module ManageIQ::Providers::Nsxt::ManagerMixin
     options[:auth_type] = auth_type
     with_provider_connection(options) {}
     true
-
   rescue => err
     miq_exception = self.class.translate_exception(err)
     raise unless miq_exception
@@ -62,5 +61,4 @@ module ManageIQ::Providers::Nsxt::ManagerMixin
     $nsxt_log.error("Error Class=#{err.class.name}, Message=#{err.message}")
     raise miq_exception
   end
-
 end

@@ -17,7 +17,7 @@ module ManageIQ::Providers::Nsxt
         action_result(false, e.to_s)
       end
     end
-    
+
     def security_groups_remove_resource(parent, _type, _id, data)
       security_group = data["name"]
       begin
@@ -70,7 +70,7 @@ module ManageIQ::Providers::Nsxt
     def self.display_name(number = 1)
       n_('Security Group (NSX-T)', 'Security Groups (NSX-T)', number)
     end
-  
+
     def self.nsxt_type
       'group'
     end
@@ -82,7 +82,7 @@ module ManageIQ::Providers::Nsxt
     def self.map_vms_to_expression(ids, options)
       return [] if ids.nil? || ids.size == 0
       external_ids = []
-      ids.each do |id| 
+      ids.each do |id|
         vm = Vm.find(id)
         raise "Vm with #{id} does not exists (anymore)" if vm.nil?
         external_ids << vm.instance_uuid

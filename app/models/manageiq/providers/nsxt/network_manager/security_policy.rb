@@ -21,7 +21,7 @@ module ManageIQ::Providers::Nsxt
     def raw_update_security_policy(options = {})
       options[:action] = 'update'
       vars = {
-        :security_policy_id => ems_ref,       
+        :security_policy_id => ems_ref,
         :security_policy_name => options[:name],
         :security_policy_description => options[:description] || '',
       }
