@@ -24,8 +24,14 @@ describe ManageIQ::Providers::Nsxt::NetworkManager::Refresher do
     end
 
     def assert_table_counts
-      expect(ExtManagementSystem.count).to eq(1)
-      # TODO: add more checks
+      expect(CloudNetwork.count).to eq(39)
+      expect(CloudSubnet.count).to eq(32)
+      expect(NetworkService.count).to eq(410)
+      expect(NetworkServiceEntry.count).to eq(802)
+      expect(NetworkRouter.count).to eq(10)
+      expect(SecurityGroup.count).to eq(48)
+      expect(SecurityPolicy.count).to eq(25)
+      expect(SecurityPolicyRule.count).to eq(39)
     end
   end
 end
