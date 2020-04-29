@@ -1,0 +1,4 @@
+GlobalVars:
+  AllowedVariables:
+  # Loggers
+  - $nsxt_log 
