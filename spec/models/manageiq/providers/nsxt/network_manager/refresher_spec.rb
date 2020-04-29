@@ -2,10 +2,10 @@ describe ManageIQ::Providers::Nsxt::NetworkManager::Refresher do
   it ".ems_type" do
     expect(described_class.ems_type).to eq(:nsxt)
   end
-  
+
   context "#refresh" do
     let(:ems) do
-      hostname = Rails.application.secrets.nsxt.try(:[], :hostname) || "NSXTHOSTNAME"
+      hostname = Rails.application.secrets.nsxt.try(:[], :hostname) || "nsxthostname"
       username = Rails.application.secrets.nsxt.try(:[], :username) || "NSXT_USERNAME"
       password = Rails.application.secrets.nsxt.try(:[], :password) || "NSXT_PASSWORD"
 
@@ -16,7 +16,7 @@ describe ManageIQ::Providers::Nsxt::NetworkManager::Refresher do
 
     it "full refresh" do
       2.times do
-        VCR.use_cassette(described_class.name) { EmsRefresh.refresh(ems) }
+        VCR.use_cassette(described_class.name.underscore) { EmsRefresh.refresh(ems) }
         ems.reload
 
         assert_table_counts
