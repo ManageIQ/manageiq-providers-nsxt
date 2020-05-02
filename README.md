@@ -1,7 +1,7 @@
 # manageiq-providers-nsxt
 
 [![Gem Version](https://badge.fury.io/rb/manageiq-providers-nsxt.svg)](http://badge.fury.io/rb/manageiq-providers-nsxt)
-[![Build Status](https://travis-ci.org/ManageIQ/manageiq-providers-nsxt.svg)](https://travis-ci.org/ManageIQ/manageiq-providers-nsxt)
+[![Build Status](https://travis-ci.com/ManageIQ/manageiq-providers-nsxt.svg)](https://travis-ci.com/ManageIQ/manageiq-providers-nsxt)
 [![Code Climate](https://codeclimate.com/github/ManageIQ/manageiq-providers-nsxt.svg)](https://codeclimate.com/github/ManageIQ/manageiq-providers-nsxt)
 [![Test Coverage](https://codeclimate.com/github/ManageIQ/manageiq-providers-nsxt/badges/coverage.svg)](https://codeclimate.com/github/ManageIQ/manageiq-providers-nsxt/coverage)
 [![Dependency Status](https://gemnasium.com/ManageIQ/manageiq-providers-nsxt.svg)](https://gemnasium.com/ManageIQ/manageiq-providers-nsxt)
@@ -10,7 +10,7 @@
 [![Chat](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ManageIQ/manageiq-providers-nsxt?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 [![Translate](https://img.shields.io/badge/translate-zanata-blue.svg)](https://translate.zanata.org/zanata/project/view/manageiq-providers-nsxt)
 
-ManageIQ plugin for the nsxtProvider provider.
+ManageIQ plugin for VMware NSX-T.
 
 ## Development
 
@@ -35,7 +35,4 @@ ems.update_authentication(:default => {:userid => "user", :password => "pw"})
 ems.authentication_check
 
 ems = ManageIQ::Providers::Nsxt::NetworkManager.first
-EmsRefresh.refresh(ems)
-
-Vm.first.perf_capture "realtime"
-Vm.first.metrics
+ems.refresh
