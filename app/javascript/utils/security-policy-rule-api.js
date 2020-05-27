@@ -5,16 +5,16 @@ export class SecurityPolicyRuleApi {
     return API.get(url);
   }
 
-  static create = async (values, id) => {
-    const response = await API.post(`/api/providers/${id}/security_policy_rules`, {
+  static create = async (values, ems_id) => {
+    const response = await API.post(`/api/providers/${ems_id}/security_policy_rules`, {
       action: 'create',
       resource: { ...values },
     });
     response['results'].forEach(res => window.add_flash(res.message, res.success ? 'success' : 'error'));
   };
 
-  static update = async (values, emsId) => {
-    const response = await API.post(`/api/providers/${emsId}/security_policy_rules`, {
+  static update = async (values, ems_id) => {
+    const response = await API.post(`/api/providers/${ems_id}/security_policy_rules`, {
       action: 'edit',
       id: values.id,
       resource: { ...values },
@@ -22,8 +22,8 @@ export class SecurityPolicyRuleApi {
     response['results'].forEach(res => window.add_flash(res.message, res.success ? 'success' : 'error'));
   };
 
-  static delete = async (values, emsId) => {
-    const response = await API.post(`/api/providers/${emsId}/security_policy_rules`, {
+  static delete = async (values, ems_id) => {
+    const response = await API.post(`/api/providers/${ems_id}/security_policy_rules`, {
       action: 'delete',
       id: values.id
     });

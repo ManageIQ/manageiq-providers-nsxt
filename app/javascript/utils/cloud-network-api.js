@@ -5,16 +5,16 @@ export class CloudNetworkApi {
     return API.get(url);
   }
 
-  static create = async (values, emsId) => {
-    const response = await API.post(`/api/providers/${emsId}/cloud_networks`, {
+  static create = async (values, ems_id) => {
+    const response = await API.post(`/api/providers/${ems_id}/cloud_networks`, {
       action: 'create',
       resource: { ...values },
     });
     response['results'].forEach(res => window.add_flash(res.message, res.success ? 'success' : 'error'));
   };
 
-  static update = async (values, emsId) => {
-    const response = await API.post(`/api/providers/${emsId}/cloud_networks`, {
+  static update = async (values, ems_id) => {
+    const response = await API.post(`/api/providers/${ems_id}/cloud_networks`, {
       action: 'edit',
       id: values.id,
       resource: { ...values },
@@ -22,8 +22,8 @@ export class CloudNetworkApi {
     response['results'].forEach(res => window.add_flash(res.message, res.success ? 'success' : 'error'));
   };
 
-  static delete = async (values, emsId) => {
-    const response = await API.post(`/api/providers/${emsId}/cloud_networks`, {
+  static delete = async (values, ems_id) => {
+    const response = await API.post(`/api/providers/${ems_id}/cloud_networks`, {
       action: 'delete',
       id: values.id
     });
