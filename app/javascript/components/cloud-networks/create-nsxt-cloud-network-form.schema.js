@@ -78,7 +78,7 @@ export default () => {
         validate: [
           {
             type: validatorTypes.REQUIRED,
-            message: __('CIDR Subnet Mask isRequired'),
+            message: __('CIDR Subnet Mask is required'),
           },
         ],
         options: subnet_mask_options,
