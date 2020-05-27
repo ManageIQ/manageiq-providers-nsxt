@@ -50,51 +50,48 @@ const security_zone_options = [
 ];
 
 export default () => {
-  const tempComponentTypes = _.clone(componentTypes);
-  const tempValidatorTypes = _.clone(validatorTypes);
-
   const schema = {
     fields: [
       {
-        component: tempComponentTypes.TEXT_FIELD,
+        component: componentTypes.TEXT_FIELD,
         name: 'name',
         label: __('Name'),
         placeholder: __('Name of the Cloud Network'),
         isRequired: true,
         validate: [{
-          type: tempValidatorTypes.REQUIRED,
+          type: validatorTypes.REQUIRED,
           message: __('Name is required'),
         }],
       },
       {
-        component: tempComponentTypes.TEXT_FIELD,
+        component: componentTypes.TEXT_FIELD,
         name: 'description',
         label: __('Description'),
         placeholder: __('Description of the Cloud Network'),
       },
       {
-        component: tempComponentTypes.SELECT,
+        component: componentTypes.SELECT,
         name: 'subnet_mask',
         label: __('CIDR Subnet Mask'),
         placeholder: __('CIDR Subnet Mask for the subnet of the Cloud Network'),
         isRequired: true,
         validate: [
           {
-            type: tempValidatorTypes.REQUIRED,
+            type: validatorTypes.REQUIRED,
             message: __('CIDR Subnet Mask isRequired'),
           },
         ],
         options: subnet_mask_options,
       },
       {
-        component: tempComponentTypes.SELECT,
+        component: componentTypes.SELECT,
         name: 'security_zone',
         label: __('Security Zone'),
         placeholder: __('Security Zone of the Cloud Network'),
         isRequired: true,
         validate: [
           {
-            type: tempValidatorTypes.REQUIRED,
+            type: validatorTypes.REQUIRED,
             message: __('Security Zone is required'),
           },
         ],
