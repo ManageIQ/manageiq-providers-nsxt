@@ -2,12 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import MiqFormRenderer from '@@ddf';
-import createSchema from './create-nsxt-security-policy-rule-form.schema';
+import createSchema from './nsxt-security-policy-rule-form.schema';
 import { NetworkServiceApi } from '../../utils/network-service-api';
 import { ProvidersApi } from '../../utils/providers.api';
 import { SecurityPolicyRuleApi } from '../../utils/security-policy-rule-api';
 import { SecurityGroupApi } from '../../utils/security-group-api';
-import { handleApiError } from '../../utils/handle-api-error';
 
 class CreateNsxtSecurityPolicyRuleForm extends React.Component {
   constructor(props) {
@@ -28,32 +27,24 @@ class CreateNsxtSecurityPolicyRuleForm extends React.Component {
 
   setInitialState = async () => {
     miqSparkleOn();
-    try {
-      const  nsxt_provider = await ProvidersApi.find_nsxt_provider();
-      const [groupOptions, serviceOptions] = await Promise.all([
-        this.getGroupOptions(nsxt_provider.id),
-        this.getServiceOptions(nsxt_provider.id),
-      ]);
-      this.setState({
-        ems_id: nsxt_provider.id,
-        groupOptions: groupOptions,
-        serviceOptions: serviceOptions
-      });
-    } catch (error) {
-      handleApiError(this, error);
-    }
+    const  nsxt_provider = await ProvidersApi.find_nsxt_provider();
+    const [groupOptions, serviceOptions] = await Promise.all([
+      this.getGroupOptions(nsxt_provider.id),
+      this.getServiceOptions(nsxt_provider.id),
+    ]);
+    this.setState({
+      ems_id: nsxt_provider.id,
+      groupOptions: groupOptions,
+      serviceOptions: serviceOptions
+    });
     this.setState({ loading: false });
     miqSparkleOff();
   }
 
   submitValues = async (values) => {
     miqSparkleOn();
-    try {
-      values.security_policy_id = ManageIQ.record.recordId;
-      await SecurityPolicyRuleApi.create(values, this.state.ems_id);
-    } catch (error) {
-      handleApiError(this, error);
-    }
+    values.security_policy_id = ManageIQ.record.recordId;
+    await SecurityPolicyRuleApi.create(values, this.state.ems_id);
     miqSparkleOff();
   };
 
@@ -68,7 +59,6 @@ class CreateNsxtSecurityPolicyRuleForm extends React.Component {
 
   render() {
     if (this.state.loading) return null;
-    if (this.state.error) { return <p>{this.state.error}</p> }
     return (
       <MiqFormRenderer
         schema={createSchema(this.state)}

@@ -2,10 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import MiqFormRenderer from '@@ddf';
-import createSchema from './create-nsxt-cloud-network-form.schema';
+import createSchema from './nsxt-cloud-network-form.schema';
 import { CloudNetworkApi } from '../../utils/cloud-network-api'
 import { ProvidersApi } from '../../utils/providers.api';
-import { handleApiError } from '../../utils/handle-api-error';
 
 class CreateNsxtCloudNetworkForm extends React.Component {
   constructor(props) {
@@ -26,23 +25,15 @@ class CreateNsxtCloudNetworkForm extends React.Component {
 
   setInitialState = async () => {
     miqSparkleOn();
-    try {
-      const nsxt_provider = await ProvidersApi.find_nsxt_provider();
-      this.setState({ ems_id: nsxt_provider.id });
-    } catch (error) {
-      handleApiError(this, error);
-    }
+    const nsxt_provider = await ProvidersApi.find_nsxt_provider();
+    this.setState({ ems_id: nsxt_provider.id });
     this.setState({ loading: false });
     miqSparkleOff();
   }
 
   submitValues = async (values) => {
     miqSparkleOn();
-    try {
-      await CloudNetworkApi.create(values, this.state.ems_id);
-    } catch (error) {
-      handleApiError(this, error);
-    }
+    await CloudNetworkApi.create(values, this.state.ems_id);
     miqSparkleOff();
   };
 
@@ -57,7 +48,6 @@ class CreateNsxtCloudNetworkForm extends React.Component {
 
   render() {
     if (this.state.loading) return null;
-    if (this.state.error) { return <p>{this.state.error}</p> }
     return (
       <MiqFormRenderer
         schema={createSchema()}

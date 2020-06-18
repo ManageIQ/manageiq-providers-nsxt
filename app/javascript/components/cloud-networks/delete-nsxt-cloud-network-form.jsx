@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import { Modal } from 'patternfly-react';
 import { CloudNetworkApi } from '../../utils/cloud-network-api';
-import { handleApiError } from '../../utils/handle-api-error';
 
 class DeleteNsxtCloudNetworkForm extends React.Component {
   constructor(props) {
@@ -26,43 +25,30 @@ class DeleteNsxtCloudNetworkForm extends React.Component {
 
   setInitialState = async () => {
     miqSparkleOn();
-    try {
-      const cloudNetwork = await CloudNetworkApi.get(
-        ManageIQ.record.recordId, { attributes: 'total_vms' }
-      );
-      if (cloudNetwork.total_vms != 0) {
-        this.setState({ error: 'This cloud network cannot be deleted as it is still in use.' });
-      } else {
-        this.setState({
-          ems_id: cloudNetwork.ems_id,
-          values: {
-            id: cloudNetwork.id,
-            name: cloudNetwork.name,
-          },
-          message: 'Are you sure you want to permanently delete this cloud network?'
-        });
-        this.props.dispatch({ type: 'FormButtons.saveable', payload: true });
-      }
-    } catch (error) {
-      handleApiError(this, error);
-    }
+    const cloudNetwork = await CloudNetworkApi.get(
+      ManageIQ.record.recordId, { attributes: 'total_vms' }
+    );
+    this.setState({
+      ems_id: cloudNetwork.ems_id,
+      values: {
+        id: cloudNetwork.id,
+        name: cloudNetwork.name,
+      },
+      message: 'Are you sure you want to permanently delete this cloud network?'
+    });
+    this.props.dispatch({ type: 'FormButtons.saveable', payload: true });
     this.setState({ loading: false });
     miqSparkleOff();
   }
 
   submitValues = async (formState) => {
     miqSparkleOn();
-    try {
-      await CloudNetworkApi.delete(formState.values, formState.ems_id);
-    } catch (error) {
-      handleApiError(this, error);
-    }
+    await CloudNetworkApi.delete(formState.values, formState.ems_id);
     miqSparkleOff();
   };
 
   render() {
     if (this.state.loading) return null;
-    if (this.state.error) { return <p>{this.state.error}</p> }
     return (
       <Modal.Body className="warning-modal-body">
         <div>

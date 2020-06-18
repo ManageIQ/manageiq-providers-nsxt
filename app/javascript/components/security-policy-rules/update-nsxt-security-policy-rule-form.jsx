@@ -2,11 +2,10 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import MiqFormRenderer from '@@ddf';
-import createSchema from './update-nsxt-security-policy-rule-form.schema';
+import createSchema from './nsxt-security-policy-rule-form.schema';
 import { NetworkServiceApi } from '../../utils/network-service-api';
 import { SecurityGroupApi } from '../../utils/security-group-api';
 import { SecurityPolicyRuleApi } from '../../utils/security-policy-rule-api';
-import { handleApiError } from '../../utils/handle-api-error';
 
 class UpdateNsxtSecurityPolicyRuleForm extends React.Component {
   constructor(props) {
@@ -28,43 +27,35 @@ class UpdateNsxtSecurityPolicyRuleForm extends React.Component {
 
   setInitialState = async () => {
     miqSparkleOn();
-    try {
-      const securityPolicyRule = await SecurityPolicyRuleApi.get(
-        ManageIQ.record.recordId,
-        { attributes: 'source_security_groups,destination_security_groups,network_services' }
-      );
-      const [groupOptions, serviceOptions] = await Promise.all([
-        this.getGroupOptions(securityPolicyRule.ems_id),
-        this.getServiceOptions(securityPolicyRule.ems_id),
-      ]);
-      this.setState({
-        ems_id: securityPolicyRule.ems_id,
-        groupOptions: groupOptions,
-        serviceOptions: serviceOptions,
-        values: {
-          id: securityPolicyRule.id,
-          emsRef: securityPolicyRule.ems_ref,
-          name: securityPolicyRule.name,
-          description: securityPolicyRule.description,
-          source_groups: securityPolicyRule.source_security_groups.map(group => group.id),
-          destination_groups: securityPolicyRule.destination_security_groups.map(group => group.id),
-          services: securityPolicyRule.network_services.map(service => service.id)
-        }
-      });
-    } catch (error) {
-      handleApiError(this, error);
-    }
+    const securityPolicyRule = await SecurityPolicyRuleApi.get(
+      ManageIQ.record.recordId,
+      { attributes: 'source_security_groups,destination_security_groups,network_services' }
+    );
+    const [groupOptions, serviceOptions] = await Promise.all([
+      this.getGroupOptions(securityPolicyRule.ems_id),
+      this.getServiceOptions(securityPolicyRule.ems_id),
+    ]);
+    this.setState({
+      ems_id: securityPolicyRule.ems_id,
+      groupOptions: groupOptions,
+      serviceOptions: serviceOptions,
+      values: {
+        id: securityPolicyRule.id,
+        emsRef: securityPolicyRule.ems_ref,
+        name: securityPolicyRule.name,
+        description: securityPolicyRule.description,
+        source_groups: securityPolicyRule.source_security_groups.map(group => group.id),
+        destination_groups: securityPolicyRule.destination_security_groups.map(group => group.id),
+        services: securityPolicyRule.network_services.map(service => service.id)
+      }
+    });
     this.setState({ loading: false });
     miqSparkleOff();
   }
 
   submitValues = async (values) => {
     miqSparkleOn();
-    try {
-      await SecurityPolicyRuleApi.update(values, this.state.ems_id);
-    } catch (error) {
-      handleApiError(this, error);
-    }
+    await SecurityPolicyRuleApi.update(values, this.state.ems_id);
     miqSparkleOff();
   };
 
@@ -79,7 +70,6 @@ class UpdateNsxtSecurityPolicyRuleForm extends React.Component {
 
   render() {
     if (this.state.loading) return null;
-    if (this.state.error) { return <p>{this.state.error}</p> }
     return (
       <MiqFormRenderer
         initialValues={this.state.values}

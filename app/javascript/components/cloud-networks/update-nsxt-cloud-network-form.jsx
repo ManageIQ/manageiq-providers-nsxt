@@ -2,9 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import MiqFormRenderer from '@@ddf';
-import createSchema from './update-nsxt-cloud-network-form.schema';
+import createSchema from './nsxt-cloud-network-form.schema';
 import { CloudNetworkApi } from '../../utils/cloud-network-api';
-import { handleApiError } from '../../utils/handle-api-error';
 
 class UpdateNsxtCloudNetworkForm extends React.Component {
   constructor(props) {
@@ -26,31 +25,23 @@ class UpdateNsxtCloudNetworkForm extends React.Component {
 
   setInitialState = async () => {
     miqSparkleOn();
-    try {
-      const cloudNetwork = await CloudNetworkApi.get(ManageIQ.record.recordId);
-      this.setState({
-        ems_id: cloudNetwork.ems_id,
-        values: {
-          id: cloudNetwork.id,
-          emsRef: cloudNetwork.ems_ref,
-          name: cloudNetwork.name,
-          description: cloudNetwork.description
-        }
-      });
-    } catch (error) {
-      handleApiError(this, error);
-    }
+    const cloudNetwork = await CloudNetworkApi.get(ManageIQ.record.recordId);
+    this.setState({
+      ems_id: cloudNetwork.ems_id,
+      values: {
+        id: cloudNetwork.id,
+        emsRef: cloudNetwork.ems_ref,
+        name: cloudNetwork.name,
+        description: cloudNetwork.description
+      }
+    });
     this.setState({ loading: false });
     miqSparkleOff();
   }
 
   submitValues = async (values) => {
     miqSparkleOn();
-    try {
-      await CloudNetworkApi.update(values, this.state.ems_id);
-    } catch (error) {
-      handleApiError(this, error);
-    }
+    await CloudNetworkApi.update(values, this.state.ems_id);
     miqSparkleOff();
   };
 
@@ -65,7 +56,6 @@ class UpdateNsxtCloudNetworkForm extends React.Component {
 
   render() {
     if (this.state.loading) return null;
-    if (this.state.error) { return <p>{this.state.error}</p> }
     return (
       <MiqFormRenderer
         initialValues={this.state.values}

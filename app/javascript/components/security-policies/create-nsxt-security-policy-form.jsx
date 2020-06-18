@@ -2,10 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import MiqFormRenderer from '@@ddf';
-import createSchema from './create-nsxt-security-policy-form.schema';
+import createSchema from './nsxt-security-policy-form.schema';
 import { ProvidersApi } from '../../utils/providers.api';
 import { SecurityPolicyApi } from '../../utils/security-policy-api';
-import { handleApiError } from '../../utils/handle-api-error';
 
 class CreateNsxtSecurityPolicyForm extends React.Component {
   constructor(props) {
@@ -26,23 +25,15 @@ class CreateNsxtSecurityPolicyForm extends React.Component {
 
   setInitialState = async () => {
     miqSparkleOn();
-    try {
-      const nsxt_provider = await ProvidersApi.find_nsxt_provider();
-      this.setState({ ems_id: nsxt_provider.id });
-    } catch (error) {
-      handleApiError(this, error);
-    }
+    const nsxt_provider = await ProvidersApi.find_nsxt_provider();
+    this.setState({ ems_id: nsxt_provider.id });
     this.setState({ loading: false });
     miqSparkleOff();
   }
 
   submitValues = async (values) => {
     miqSparkleOn();
-    try {
-      await SecurityPolicyApi.create(values, this.state.ems_id);
-    } catch (error) {
-      handleApiError(this, error);
-    }
+    await SecurityPolicyApi.create(values, this.state.ems_id);
     miqSparkleOff();
   };
 
@@ -57,7 +48,6 @@ class CreateNsxtSecurityPolicyForm extends React.Component {
 
   render() {
     if (this.state.loading) return null;
-    if (this.state.error) { return <p>{this.state.error}</p> }
     return (
       <MiqFormRenderer
         schema={createSchema(this.getVmOptions)}
