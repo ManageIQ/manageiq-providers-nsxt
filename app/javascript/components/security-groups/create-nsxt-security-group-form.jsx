@@ -31,7 +31,7 @@ class CreateNsxtSecurityGroupForm extends React.Component {
     ]);
     this.setState({
       ems_id: nsxt_provider.id,
-      vmOptions, vmOptions
+      vmOptions: vmOptions
     });
     this.setState({ loading: false });
     miqSparkleOff();
