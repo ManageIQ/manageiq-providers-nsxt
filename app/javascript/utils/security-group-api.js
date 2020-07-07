@@ -1,7 +1,7 @@
 export class SecurityGroupApi {
-  static list = async (emsId, option = { attributes: null }) => {
+  static list = async (ems_id, option = { attributes: null }) => {
     const attributes = `attributes=ems_ref,name,ems_id${!option.attributes ? '' : `,${option.attributes}`}`;
-    const url = `/api/providers/${emsId}/security_groups/?${attributes}&expand=resources`;
+    const url = `/api/providers/${ems_id}/security_groups/?${attributes}&expand=resources`;
     return API.get(url);
   }
 
@@ -11,16 +11,16 @@ export class SecurityGroupApi {
     return API.get(url);
   }
 
-  static create = async (values, emsId) => {
-    const response = await API.post(`/api/providers/${emsId}/security_groups`, {
+  static create = async (values, ems_id) => {
+    const response = await API.post(`/api/providers/${ems_id}/security_groups`, {
       action: 'create',
       resource: { ...values },
     });
     response['results'].forEach(res => window.add_flash(res.message, res.success ? 'success' : 'error'));
   };
 
-  static update = async (values, emsId) => {
-    const response = await API.post(`/api/providers/${emsId}/security_groups`, {
+  static update = async (values, ems_id) => {
+    const response = await API.post(`/api/providers/${ems_id}/security_groups`, {
       action: 'edit',
       id: values.id,
       resource: { ...values },
@@ -28,8 +28,8 @@ export class SecurityGroupApi {
     response['results'].forEach(res => window.add_flash(res.message, res.success ? 'success' : 'error'));
   };
 
-  static delete = async (values, emsId) => {
-    const response = await API.post(`/api/providers/${emsId}/security_groups`, {
+  static delete = async (values, ems_id) => {
+    const response = await API.post(`/api/providers/${ems_id}/security_groups`, {
       action: 'delete',
       id: values.id
     });
