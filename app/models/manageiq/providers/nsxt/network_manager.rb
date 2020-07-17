@@ -29,6 +29,10 @@ class ManageIQ::Providers::Nsxt::NetworkManager < ManageIQ::Providers::NetworkMa
     self[:name]
   end
 
+  def queue_name_for_ems_refresh
+    queue_name
+  end
+
   def cloud_tenants
     ::CloudTenant.where(:ems_id => id)
   end
