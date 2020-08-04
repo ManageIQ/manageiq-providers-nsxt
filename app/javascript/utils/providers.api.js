@@ -12,10 +12,10 @@ export class ProvidersApi {
     const providers = await ProvidersApi.list(
       {filter: 'filter[]=type=ManageIQ::Providers::Nsxt::NetworkManager'}
     );
-    if (1 < providers.length) {
+    if (providers.length < 1) {
       throw 'The NSX-T provider is missing';
     }
-    if (providers.length < 1) {
+    if (providers.length > 1) {
       throw 'More than one NSX-T provider found, could not determine the correct provider';
     }
     return providers[0];
