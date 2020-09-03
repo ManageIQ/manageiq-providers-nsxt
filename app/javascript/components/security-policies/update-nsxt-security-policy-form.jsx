@@ -12,14 +12,6 @@ class UpdateNsxtSecurityPolicyForm extends React.Component {
   }
 
   async componentDidMount() {
-    this.props.dispatch({
-      type: 'FormButtons.init',
-      payload: {
-        newRecord: true,
-        pristine: true
-      }
-    });
-    this.props.dispatch({ type: "FormButtons.customLabel", payload: __('Update') });
     this.setInitialState();
   }
 
@@ -45,14 +37,23 @@ class UpdateNsxtSecurityPolicyForm extends React.Component {
     miqSparkleOff();
   };
 
-  handleFormStateUpdate = (formState) => {
-    this.props.dispatch({ type: 'FormButtons.saveable', payload: formState.valid });
-    this.props.dispatch({ type: 'FormButtons.pristine', payload: formState.pristine });
+  initialize = (formOptions) => {
+    this.props.dispatch({
+      type: 'FormButtons.init',
+      payload: {
+        newRecord: true,
+        pristine: true
+      }
+    });
+
+    this.props.dispatch({ type: "FormButtons.customLabel", payload: __('Update') });
+
     this.props.dispatch({
       type: 'FormButtons.callbacks',
-      payload: { addClicked: () => this.submitValues(formState.values) },
+      payload: { addClicked: () => formOptions.submit() },
     });
   }
+
 
   render() {
     if (this.state.loading) return null;
@@ -62,7 +63,7 @@ class UpdateNsxtSecurityPolicyForm extends React.Component {
         schema={createSchema(this.getVmOptions)}
         onSubmit={this.submitValues}
         showFormControls={false}
-        onStateUpdate={this.handleFormStateUpdate}
+        initialize={this.initialize}
       />
     )
   }

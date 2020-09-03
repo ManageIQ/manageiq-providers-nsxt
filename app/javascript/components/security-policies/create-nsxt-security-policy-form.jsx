@@ -13,13 +13,6 @@ class CreateNsxtSecurityPolicyForm extends React.Component {
   }
 
   componentDidMount() {
-    this.props.dispatch({
-      type: 'FormButtons.init',
-      payload: {
-        newRecord: true,
-        pristine: true
-      }
-    });
     this.setInitialState();
   }
 
@@ -37,14 +30,21 @@ class CreateNsxtSecurityPolicyForm extends React.Component {
     miqSparkleOff();
   };
 
-  handleFormStateUpdate = (formState) => {
-    this.props.dispatch({ type: 'FormButtons.saveable', payload: formState.valid });
-    this.props.dispatch({ type: 'FormButtons.pristine', payload: formState.pristine });
+  initialize = (formOptions) => {
+    this.props.dispatch({
+      type: 'FormButtons.init',
+      payload: {
+        newRecord: true,
+        pristine: true
+      }
+    });
+
     this.props.dispatch({
       type: 'FormButtons.callbacks',
-      payload: { addClicked: () => this.submitValues(formState.values) },
+      payload: { addClicked: () => formOptions.submit() },
     });
   }
+
 
   render() {
     if (this.state.loading) return null;
@@ -53,7 +53,7 @@ class CreateNsxtSecurityPolicyForm extends React.Component {
         schema={createSchema(this.getVmOptions)}
         onSubmit={this.submitValues}
         showFormControls={false}
-        onStateUpdate={this.handleFormStateUpdate}
+        initialize={this.initialize}
       />
     )
   }
