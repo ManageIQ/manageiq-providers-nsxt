@@ -3,16 +3,15 @@ require 'rubygems'
 require 'json'
 class ManageIQ::Providers::Nsxt::NsxtClient
   include Vmdb::Logging
-  def initialize(server, user, password)
+  def initialize(server, user, password, verify_ssl = false)
     @server = server
     @user = user
     @password = password
-    @client = Rest.new(server, user, password)
+    @client = Rest.new(server, user, password, verify_ssl)
     connected, data = @client.login
-    if connected
-      return
-    end
-    $nsxt_log.error('NSX-T Authentication failed')
+    return if connected
+
+    raise 'NSX-T Authentication failed'
   end
 
   def get_tier_1(id)

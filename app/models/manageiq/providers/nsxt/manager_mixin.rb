@@ -4,8 +4,8 @@ module ManageIQ::Providers::Nsxt::ManagerMixin
   extend ActiveSupport::Concern
 
   module ClassMethods
-    def raw_connect(base_url, username, password)
-      ManageIQ::Providers::Nsxt::NsxtClient.new(base_url, username, password)
+    def raw_connect(base_url, username, password, verify_ssl = false)
+      ManageIQ::Providers::Nsxt::NsxtClient.new(base_url, username, password, verify_ssl)
     end
 
     def translate_exception(err)
@@ -29,7 +29,7 @@ module ManageIQ::Providers::Nsxt::ManagerMixin
   end
 
   def base_url(protocol, server, port)
-    scheme = %w[ssl ssl-with-validation].include?(protocol) ? "https" : "http"
+    scheme = protocol == 'non-ssl' ? "http" : "https"
     URI::Generic.build(:scheme => scheme, :host => server, :port => port).to_s
   end
 
