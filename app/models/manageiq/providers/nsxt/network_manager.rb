@@ -25,6 +25,10 @@ class ManageIQ::Providers::Nsxt::NetworkManager < ManageIQ::Providers::NetworkMa
     @description ||= "VMware NSX-T Network Manager".freeze
   end
 
+  def self.supported_for_create?
+    true
+  end
+
   def name
     self[:name]
   end
