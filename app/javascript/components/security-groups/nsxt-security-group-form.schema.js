@@ -5,6 +5,7 @@ export default (state) => {
     fields: [
       {
         component: componentTypes.TEXT_FIELD,
+        id: 'name',
         name: 'name',
         label: __('Name'),
         placeholder: __('Name of the Security Group'),
@@ -16,12 +17,14 @@ export default (state) => {
       },
       {
         component: componentTypes.TEXT_FIELD,
+        id: 'description',
         name: 'description',
         label: __('Description'),
         placeholder: __('Description of the Security Group'),
       },
       {
         component: componentTypes.SELECT,
+        id: 'vms',
         name: 'vms',
         label: __('Selected VM\'s'),
         placeholder: __('Selected VM\'s of the Security Group'),

@@ -54,6 +54,7 @@ export default () => {
     fields: [
       {
         component: componentTypes.TEXT_FIELD,
+        id: 'name',
         name: 'name',
         label: __('Name'),
         placeholder: __('Name of the Cloud Network'),
@@ -65,12 +66,14 @@ export default () => {
       },
       {
         component: componentTypes.TEXT_FIELD,
+        id: 'description',
         name: 'description',
         label: __('Description'),
         placeholder: __('Description of the Cloud Network'),
       },
       {
         component: componentTypes.SELECT,
+        id: 'subnet_mask',
         name: 'subnet_mask',
         label: __('CIDR Subnet Mask'),
         placeholder: __('CIDR Subnet Mask for the subnet of the Cloud Network'),
@@ -85,6 +88,7 @@ export default () => {
       },
       {
         component: componentTypes.SELECT,
+        id: 'security_zone',
         name: 'security_zone',
         label: __('Security Zone'),
         placeholder: __('Security Zone of the Cloud Network'),

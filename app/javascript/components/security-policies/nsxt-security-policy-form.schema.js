@@ -5,6 +5,7 @@ export default () => {
     fields: [
       {
         component: componentTypes.TEXT_FIELD,
+        id: 'name',
         name: 'name',
         label: __('Name'),
         placeholder: __('Name of the Security Policy'),
@@ -16,6 +17,7 @@ export default () => {
       },
       {
         component: componentTypes.TEXT_FIELD,
+        id: 'description',
         name: 'description',
         label: __('Description'),
         placeholder: __('Description of the Security Policy'),
