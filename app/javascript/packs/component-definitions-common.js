@@ -1,6 +1,5 @@
-import CreateNsxtCloudNetworkForm from '../components/cloud-networks/create-nsxt-cloud-network-form';
+import NsxtCloudNetworkForm from '../components/cloud-networks/create-nsxt-cloud-network-form';
 import DeleteNsxtCloudNetworkForm from '../components/cloud-networks/delete-nsxt-cloud-network-form';
-import UpdateNsxtCloudNetworkForm from '../components/cloud-networks/update-nsxt-cloud-network-form';
 import CreateNsxtSecurityGroupForm from '../components/security-groups/create-nsxt-security-group-form';
 import DeleteNsxtSecurityGroupForm from '../components/security-groups/delete-nsxt-security-group-form';
 import UpdateNsxtSecurityGroupForm from '../components/security-groups/update-nsxt-security-group-form';
@@ -11,9 +10,8 @@ import CreateNsxtSecurityPolicyRuleForm from '../components/security-policy-rule
 import DeleteNsxtSecurityPolicyRuleForm from '../components/security-policy-rules/delete-nsxt-security-policy-rule-form';
 import UpdateNsxtSecurityPolicyRuleForm from '../components/security-policy-rules/update-nsxt-security-policy-rule-form';
 
-ManageIQ.component.addReact('CreateNsxtCloudNetworkForm', CreateNsxtCloudNetworkForm);
+ManageIQ.component.addReact('NsxtCloudNetworkForm', NsxtCloudNetworkForm);
 ManageIQ.component.addReact('DeleteNsxtCloudNetworkForm', DeleteNsxtCloudNetworkForm);
-ManageIQ.component.addReact('UpdateNsxtCloudNetworkForm', UpdateNsxtCloudNetworkForm);
 ManageIQ.component.addReact('CreateNsxtSecurityGroupForm', CreateNsxtSecurityGroupForm);
 ManageIQ.component.addReact('DeleteNsxtSecurityGroupForm', DeleteNsxtSecurityGroupForm);
 ManageIQ.component.addReact('UpdateNsxtSecurityGroupForm', UpdateNsxtSecurityGroupForm);
