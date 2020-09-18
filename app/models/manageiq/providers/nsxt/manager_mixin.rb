@@ -4,8 +4,8 @@ module ManageIQ::Providers::Nsxt::ManagerMixin
   extend ActiveSupport::Concern
 
   module ClassMethods
-    def raw_connect(base_url, username, password)
-      ManageIQ::Providers::Nsxt::NsxtClient.new(base_url, username, password)
+    def raw_connect(base_url, username, password, verify_ssl = false)
+      ManageIQ::Providers::Nsxt::NsxtClient.new(base_url, username, password, verify_ssl)
     end
 
     def translate_exception(err)
@@ -22,15 +22,110 @@ module ManageIQ::Providers::Nsxt::ManagerMixin
         MiqException::MiqEVMLoginError.new "Unexpected response returned from system: #{err.message}"
       end
     end
+
+    def params_for_create
+      @params_for_create ||= {
+        :fields => [
+          {
+            :component => 'switch',
+            :id        => 'tenant_mapping_enabled',
+            :name      => 'tenant_mapping_enabled',
+            :label     => _('Tenant Mapping Enabled'),
+          },
+          {
+            :component => 'sub-form',
+            :id        => 'endpoints-subform',
+            :name      => 'endpoints-subform',
+            :title     => _("Endpoints"),
+            :fields    => [
+              {
+                :component              => 'validate-provider-credentials',
+                :id                     => 'endpoints.default.valid',
+                :name                   => 'endpoints.default.valid',
+                :skipSubmit             => true,
+                :validationDependencies => %w[type zone_id],
+                :fields                 => [
+                  {
+                    :component  => "select",
+                    :id         => "endpoints.default.security_protocol",
+                    :name       => "endpoints.default.security_protocol",
+                    :label      => _("Security Protocol"),
+                    :isRequired => true,
+                    :validate   => [{:type => "required"}],
+                    :options    => [
+                      {
+                        :label => _("SSL without validation"),
+                        :value => "ssl-no-validation"
+                      },
+                      {
+                        :label => _("SSL"),
+                        :value => "ssl-with-validation"
+                      },
+                      {
+                        :label => _("Non-SSL"),
+                        :value => "non-ssl"
+                      }
+                    ]
+                  },
+                  {
+                    :component  => "text-field",
+                    :id         => "endpoints.default.hostname",
+                    :name       => "endpoints.default.hostname",
+                    :label      => _("Hostname (or IPv4 or IPv6 address)"),
+                    :isRequired => true,
+                    :validate   => [{:type => "required"}]
+                  },
+                  {
+                    :component    => "text-field",
+                    :id           => "endpoints.default.port",
+                    :name         => "endpoints.default.port",
+                    :label        => _("API Port"),
+                    :type         => "number",
+                    :isRequired   => true,
+                    :validate     => [{:type => "required"}],
+                    :initialValue => 443,
+                  },
+                  {
+                    :component  => "text-field",
+                    :id         => "authentications.default.userid",
+                    :name       => "authentications.default.userid",
+                    :label      => _("Username"),
+                    :isRequired => true,
+                    :validate   => [{:type => "required"}],
+                  },
+                  {
+                    :component  => "password-field",
+                    :id         => "authentications.default.password",
+                    :name       => "authentications.default.password",
+                    :label      => _("Password"),
+                    :type       => "password",
+                    :isRequired => true,
+                    :validate   => [{:type => "required"}],
+                  },
+                ],
+              },
+            ],
+          },
+        ]
+      }.freeze
+    end
+
+    def verify_credentials(args)
+      endpoint = args.dig("endpoints", 'default')
+      hostname, security_protocol, port = endpoint&.values_at('hostname', 'security_protocol', 'port')
+      authentication = args.dig("authentications", "default")
+      userid, password = authentication&.values_at('userid', 'password')
+      !!raw_connect(base_url(security_protocol, hostname, port), userid, password, security_protocol == 'ssl-with-validation')
+    end
+
+    def base_url(protocol, server, port)
+      scheme = protocol == 'non-ssl' ? "http" : "https"
+      URI::Generic.build(:scheme => scheme, :host => server, :port => port).to_s
+    end
   end
 
   def description
     "Vmware NSX-T"
-  end
-
-  def base_url(protocol, server, port)
-    scheme = %w[ssl ssl-with-validation].include?(protocol) ? "https" : "http"
-    URI::Generic.build(:scheme => scheme, :host => server, :port => port).to_s
   end
 
   def connect(options = {})
@@ -42,7 +137,7 @@ module ManageIQ::Providers::Nsxt::ManagerMixin
     username = options[:user] || authentication_userid(options[:auth_type])
     password = options[:pass] || authentication_password(options[:auth_type])
 
-    url = base_url(protocol, server, port)
+    url = self.class.base_url(protocol, server, port)
     self.class.raw_connect(url, username, password)
   end
 
