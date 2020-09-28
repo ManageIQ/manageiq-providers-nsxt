@@ -43,6 +43,7 @@ module ManageIQ::Providers::Nsxt::ManagerMixin
                 :id                     => 'endpoints.default.valid',
                 :name                   => 'endpoints.default.valid',
                 :skipSubmit             => true,
+                :isRequired             => true,
                 :validationDependencies => %w[type zone_id],
                 :fields                 => [
                   {
