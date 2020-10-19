@@ -26,10 +26,6 @@ class ManageIQ::Providers::Nsxt::Inventory::Collector::TargetCollection < Manage
     refs.map { |ems_ref| connection.get_group(ems_ref) }.compact
   end
 
-  def group_members(ems_ref)
-    connection.get_group_members(ems_ref)
-  end
-  
   def security_policies
     return [] if (refs = references(:security_policies)).blank?
     refs.map { |ems_ref| connection.get_security_policy(ems_ref) }.compact
