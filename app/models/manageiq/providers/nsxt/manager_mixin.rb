@@ -87,14 +87,14 @@ module ManageIQ::Providers::Nsxt::ManagerMixin
                     :initialValue => 443,
                   },
                   {
-                    :component  => "select",
-                    :id         => "endpoints.default.api_version",
-                    :name       => "endpoints.default.api_version",
-                    :label      => _("API Version"),
-                    :isRequired => true,
-                    :validate   => [{:type => "required"}],
+                    :component    => "select",
+                    :id           => "endpoints.default.api_version",
+                    :name         => "endpoints.default.api_version",
+                    :label        => _("API Version"),
+                    :isRequired   => true,
+                    :validate     => [{:type => "required"}],
                     :initialValue => "GM_V1",
-                    :options    => [
+                    :options      => [
                       {
                         :label => _("Global Manager - Version 1"),
                         :value => "GM_V1"
