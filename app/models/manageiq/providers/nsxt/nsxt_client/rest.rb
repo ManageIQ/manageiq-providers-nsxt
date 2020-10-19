@@ -56,7 +56,7 @@ class ManageIQ::Providers::Nsxt::NsxtClient::Rest
     options[:proxy] = proxy if proxy
     options[:payload] = data if data
 
-    response = RestClient::Request.execute(options) { |response| response } # silence errors like 404
+    response = RestClient::Request.execute(options) { |r| r } # silence errors like 404
     $nsxt_log.debug("NSX-T request with url #{url} has response #{response}")
     return response
   end

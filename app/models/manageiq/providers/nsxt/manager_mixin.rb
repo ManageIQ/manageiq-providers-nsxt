@@ -93,6 +93,7 @@ module ManageIQ::Providers::Nsxt::ManagerMixin
                     :label      => _("API Version"),
                     :isRequired => true,
                     :validate   => [{:type => "required"}],
+                    :initialValue => "GM_V1",
                     :options    => [
                       {
                         :label => _("Global Manager - Version 1"),
@@ -102,8 +103,7 @@ module ManageIQ::Providers::Nsxt::ManagerMixin
                         :label => _("Local Manager - Version 1"),
                         :value => "LM_V1"
                       }
-                    ],
-                    :initialValue => "GM_V1",
+                    ]
                   },
                   {
                     :component  => "text-field",
@@ -135,7 +135,7 @@ module ManageIQ::Providers::Nsxt::ManagerMixin
       hostname, security_protocol, port = endpoint&.values_at('hostname', 'security_protocol', 'port')
       authentication = args.dig("authentications", "default")
       userid, password = authentication&.values_at('userid', 'password')
-      password = ManageIQ::Password.try_decrypt(password)      
+      password = ManageIQ::Password.try_decrypt(password)
       !!raw_connect(base_url(security_protocol, hostname, port), userid, password, security_protocol == 'ssl-with-validation')
     end
 

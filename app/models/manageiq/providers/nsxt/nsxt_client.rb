@@ -62,8 +62,7 @@ class ManageIQ::Providers::Nsxt::NsxtClient
 
   def list(url)
     json = get(url)
-    return [] if json.nil? || json['results'].nil?
-    return json['results']
+    json.nil? || json['results'].nil? ? [] : json['results']
   end
 
   def get(url)
