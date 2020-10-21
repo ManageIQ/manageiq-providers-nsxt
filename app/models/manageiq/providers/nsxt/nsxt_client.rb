@@ -3,8 +3,8 @@ require 'rubygems'
 require 'json'
 class ManageIQ::Providers::Nsxt::NsxtClient
   include Vmdb::Logging
-  def initialize(server, user, password, verify_ssl = false, api_version = 'GM_V1')
-    @base_url = "#{server}/#{API_VERSIONS[api_version]}"
+  def initialize(server, path, user, password, verify_ssl = false)
+    @base_url = "#{server}/#{path}"
     @user = user
     @password = password
     @client = Rest.new(server, user, password, verify_ssl)
@@ -62,21 +62,16 @@ class ManageIQ::Providers::Nsxt::NsxtClient
 
   def list(url)
     json = get(url)
-    json.nil? || json['results'].nil? ? [] : json['results']
+    json&.dig("results") || []
   end
 
   def get(url)
     response = @client.get("#{@base_url}/#{url}")
     if response.body.empty? || response.code != 200
-      $nsxt_log.warn("Invalid response #{response} for REST call #{url}")
+      $nsxt_log.warn("Invalid response #{response} for REST call #{@base_url}/#{url}")
       return nil
     end
     json = JSON.parse(response.body)
     return json
   end
-
-  API_VERSIONS = {
-    'GM_V1' => 'global-manager/api/v1/global-infra',
-    'LM_V1' => 'policy/api/v1/infra'
-  }.freeze
 end

@@ -63,7 +63,7 @@ class ManageIQ::Providers::Nsxt::Inventory::Parser::NetworkManager < ManageIQ::P
     return if segment['subnets'].nil?
     segment['subnets'].each do |segment_subnet|
       id = "#{segment['id']}-#{segment_subnet['gateway_address']}"
-      network_router_id = segment['connectivity_path'].split('/infra/tier-1s/').last
+      network_router_id = segment['connectivity_path'].split('/tier-1s/').last
       cloud_subnet = persister.cloud_subnets.find_or_build(id)
       cloud_subnet.name = "#{segment['display_name']}-#{segment_subnet['gateway_address']}"
       cloud_subnet.cloud_tenant = cloud_tenant(segment['tags'])
@@ -161,7 +161,7 @@ class ManageIQ::Providers::Nsxt::Inventory::Parser::NetworkManager < ManageIQ::P
       security_policy_rule.network_services = [] if security_policy_rule.network_services.nil?
       rule['services'].each do |service|
         next if service == 'ANY'
-        network_service = persister.network_services.lazy_find(service.split('/infra/services/').last)
+        network_service = persister.network_services.lazy_find(service.split('/services/').last)
         security_policy_rule.network_services << network_service unless network_service.nil?
       end
     end
