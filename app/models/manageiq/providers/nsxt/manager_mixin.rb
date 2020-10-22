@@ -154,7 +154,7 @@ module ManageIQ::Providers::Nsxt::ManagerMixin
     protocol    = options[:protocol] || security_protocol
     server      = options[:ip] || address
     port        = options[:port] || self.port
-    path        = options[:path] || self.endpoint_path
+    path        = options[:path] || endpoint_path
     verify_ssl  = options[:verify_ssl] || verify_ssl
     username    = options[:user] || authentication_userid(options[:auth_type])
     password    = options[:pass] || authentication_password(options[:auth_type])
