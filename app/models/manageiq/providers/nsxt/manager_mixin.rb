@@ -4,8 +4,8 @@ module ManageIQ::Providers::Nsxt::ManagerMixin
   extend ActiveSupport::Concern
 
   module ClassMethods
-    def raw_connect(base_url, username, password, verify_ssl = false)
-      ManageIQ::Providers::Nsxt::NsxtClient.new(base_url, username, password, verify_ssl)
+    def raw_connect(server, path, username, password, verify_ssl = false)
+      ManageIQ::Providers::Nsxt::NsxtClient.new(server, path, username, password, verify_ssl)
     end
 
     def translate_exception(err)
@@ -87,6 +87,24 @@ module ManageIQ::Providers::Nsxt::ManagerMixin
                     :initialValue => 443,
                   },
                   {
+                    :component  => "select",
+                    :id         => "endpoints.default.path",
+                    :name       => "endpoints.default.path",
+                    :label      => _("Manager Role"),
+                    :isRequired => true,
+                    :validate   => [{:type => "required"}],
+                    :options    => [
+                      {
+                        :label => _("Federation Global Manager"),
+                        :value => "global-manager/api/v1/global-infra"
+                      },
+                      {
+                        :label => _("Federation Local or Single Manager"),
+                        :value => "policy/api/v1/infra"
+                      }
+                    ]
+                  },
+                  {
                     :component  => "text-field",
                     :id         => "authentications.default.userid",
                     :name       => "authentications.default.userid",
@@ -113,10 +131,11 @@ module ManageIQ::Providers::Nsxt::ManagerMixin
 
     def verify_credentials(args)
       endpoint = args.dig("endpoints", 'default')
-      hostname, security_protocol, port = endpoint&.values_at('hostname', 'security_protocol', 'port')
+      hostname, security_protocol, port, path = endpoint&.values_at('hostname', 'security_protocol', 'port', 'path')
       authentication = args.dig("authentications", "default")
       userid, password = authentication&.values_at('userid', 'password')
-      !!raw_connect(base_url(security_protocol, hostname, port), userid, password, security_protocol == 'ssl-with-validation')
+      password = ManageIQ::Password.try_decrypt(password)
+      !!raw_connect(base_url(security_protocol, hostname, port), path, userid, password, security_protocol == 'ssl-with-validation')
     end
 
     def base_url(protocol, server, port)
@@ -126,20 +145,22 @@ module ManageIQ::Providers::Nsxt::ManagerMixin
   end
 
   def description
-    "Vmware NSX-T"
+    "VMware NSX-T"
   end
 
   def connect(options = {})
     raise "no credentials defined" if self.missing_credentials?(options[:auth_type])
 
-    protocol = options[:protocol] || security_protocol
-    server   = options[:ip] || address
-    port     = options[:port] || self.port
-    username = options[:user] || authentication_userid(options[:auth_type])
-    password = options[:pass] || authentication_password(options[:auth_type])
+    protocol    = options[:protocol] || security_protocol
+    server      = options[:ip] || address
+    port        = options[:port] || self.port
+    path        = options[:path] || endpoint_path
+    verify_ssl  = options[:verify_ssl] || verify_ssl
+    username    = options[:user] || authentication_userid(options[:auth_type])
+    password    = options[:pass] || authentication_password(options[:auth_type])
 
-    url = self.class.base_url(protocol, server, port)
-    self.class.raw_connect(url, username, password)
+    server = self.class.base_url(protocol, server, port)
+    self.class.raw_connect(server, path, username, password, verify_ssl)
   end
 
   def verify_credentials(auth_type = nil, options = {})

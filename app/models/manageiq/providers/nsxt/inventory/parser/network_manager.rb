@@ -63,7 +63,7 @@ class ManageIQ::Providers::Nsxt::Inventory::Parser::NetworkManager < ManageIQ::P
     return if segment['subnets'].nil?
     segment['subnets'].each do |segment_subnet|
       id = "#{segment['id']}-#{segment_subnet['gateway_address']}"
-      network_router_id = segment['connectivity_path'].split('/infra/tier-1s/').last
+      network_router_id = segment['connectivity_path'].split('/tier-1s/').last
       cloud_subnet = persister.cloud_subnets.find_or_build(id)
       cloud_subnet.name = "#{segment['display_name']}-#{segment_subnet['gateway_address']}"
       cloud_subnet.cloud_tenant = cloud_tenant(segment['tags'])
@@ -107,20 +107,20 @@ class ManageIQ::Providers::Nsxt::Inventory::Parser::NetworkManager < ManageIQ::P
   end
 
   def security_groups_network_ports(security_group)
-    group_members = collector.group_members(security_group.ems_ref)
-    group_members.each do |group_member|
-      # TODO: This depends on vm.instance_uuid which doesn't exist yet
-      # vm = Vm.find_by(:instance_uuid => group_member['id'])
-      # next if vm.nil?
-      # network_port = persister.network_ports.find_or_build(group_member['id'])
-      # network_port.name = group_member['display_name']
-      # network_port.cloud_tenant = security_group.cloud_tenant
-      # network_port.status = 'active'
-      # network_port.device = vm
-      # network_port.device_ref = group_member['id']
-      # network_port.security_groups = [] if network_port.security_groups.nil?
-      # network_port.security_groups << security_group
-    end
+    # TODO: This depends on vm.instance_uuid which doesn't exist yet
+    # group_members = collector.group_members(security_group.ems_ref)
+    # group_members.each do |group_member|
+    #   vm = Vm.find_by(:instance_uuid => group_member['id'])
+    #   next if vm.nil?
+    #   network_port = persister.network_ports.find_or_build(group_member['id'])
+    #   network_port.name = group_member['display_name']
+    #   network_port.cloud_tenant = security_group.cloud_tenant
+    #   network_port.status = 'active'
+    #   network_port.device = vm
+    #   network_port.device_ref = group_member['id']
+    #   network_port.security_groups = [] if network_port.security_groups.nil?
+    #   network_port.security_groups << security_group
+    # end
   end
 
   def security_policies
@@ -161,7 +161,7 @@ class ManageIQ::Providers::Nsxt::Inventory::Parser::NetworkManager < ManageIQ::P
       security_policy_rule.network_services = [] if security_policy_rule.network_services.nil?
       rule['services'].each do |service|
         next if service == 'ANY'
-        network_service = persister.network_services.lazy_find(service.split('/infra/services/').last)
+        network_service = persister.network_services.lazy_find(service.split('/services/').last)
         security_policy_rule.network_services << network_service unless network_service.nil?
       end
     end

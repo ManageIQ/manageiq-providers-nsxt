@@ -15,10 +15,6 @@ class ManageIQ::Providers::Nsxt::Inventory::Collector::NetworkManager < ManageIQ
     connection.get_groups
   end
 
-  def group_members(id)
-    connection.get_group_members(id)
-  end
-  
   def security_policies
     connection.get_security_policies
   end
