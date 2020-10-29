@@ -15,26 +15,26 @@ module ManageIQ
                   button(
                     :cloud_network_edit,
                     'pficon pficon-edit fa-lg',
-                    t = N_('Edit Cloud Network'),
+                    t = N_('Edit this Cloud Network (NSX-T)'),
                     t,
                     :data  => {'function'      => 'sendDataWithRx',
                                'function-data' => {:controller     => 'provider_dialogs',
                                                    :button         => :nsxt_update_cloud_network,
                                                    :modal_title    => N_('Update Cloud Network'),
                                                    :component_name => 'UpdateNsxtCloudNetworkForm'}},
-                    :klass => ApplicationHelper::Button::Basic
+                    :klass => ApplicationHelper::Button::BelongsToAnyNsxtNetworkManager
                   ),
                   button(
                     :cloud_network_delete,
                     'pficon pficon-delete fa-lg',
-                    t = N_('Remove Cloud Network'),
+                    t = N_('Delete this Cloud Network'),
                     t,
                     :data  => {'function'      => 'sendDataWithRx',
                                'function-data' => {:controller     => 'provider_dialogs',
                                                    :button         => :nsxt_delete_cloud_network,
                                                    :modal_title    => N_('Remove Cloud Network'),
                                                    :component_name => 'DeleteNsxtCloudNetworkForm'}},
-                    :klass => ApplicationHelper::Button::Basic
+                    :klass => ApplicationHelper::Button::BelongsToAnyNsxtNetworkManager
                   ),
                 ]
               )
