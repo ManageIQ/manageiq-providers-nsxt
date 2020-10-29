@@ -17,12 +17,15 @@ module ManageIQ
                     'pficon pficon-add-circle-o fa-lg',
                     t = N_('Add a new Cloud Network (NSX-T)'),
                     t,
-                    :data  => {'function'      => 'sendDataWithRx',
-                        'function-data' => {
-                          :controller     => 'provider_dialogs',
-                          :button         => :nsxt_create_cloud_network,
-                          :modal_title    => N_('Add Cloud Network (NSX-T)'),
-                          :component_name => 'CreateNsxtCloudNetworkForm'}},
+                    :data => {
+                      'function'      => 'sendDataWithRx',
+                      'function-data' => {
+                        :controller     => 'provider_dialogs',
+                        :button         => :nsxt_create_cloud_network,
+                        :modal_title    => N_('Add Cloud Network (NSX-T)'),
+                        :component_name => 'CreateNsxtCloudNetworkForm'
+                      }
+                    },
                     :klass => ApplicationHelper::Button::AnyNsxtNetworkManager
                   )
                 ]

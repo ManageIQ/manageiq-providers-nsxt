@@ -17,11 +17,15 @@ module ManageIQ
                     'pficon pficon-edit fa-lg',
                     t = N_('Edit this Security Group (NSX-T)'),
                     t,
-                    :data  => {'function'      => 'sendDataWithRx',
-                               'function-data' => {:controller     => 'provider_dialogs',
-                                                   :button         => :nsxt_update_security_group,
-                                                   :modal_title    => N_('Update Security Group (NSX-T)'),
-                                                   :component_name => 'UpdateNsxtSecurityGroupForm'}},
+                    :data => {
+                      'function'      => 'sendDataWithRx',
+                      'function-data' => {
+                        :controller     => 'provider_dialogs',
+                        :button         => :nsxt_update_security_group,
+                        :modal_title    => N_('Update Security Group (NSX-T)'),
+                        :component_name => 'UpdateNsxtSecurityGroupForm'
+                      }
+                    },
                     :klass => ApplicationHelper::Button::BelongsToAnyNsxtNetworkManager
                   ),
                   button(
@@ -29,11 +33,15 @@ module ManageIQ
                     'pficon pficon-delete fa-lg',
                     t = N_('Remove this Security Group (NSX-T)'),
                     t,
-                    :data  => {'function'      => 'sendDataWithRx',
-                               'function-data' => {:controller     => 'provider_dialogs',
-                                                   :button         => :nsxt_delete_security_group,
-                                                   :modal_title    => N_('Remove Security Group'),
-                                                   :component_name => 'DeleteNsxtSecurityGroupForm'}},
+                    :data => {
+                      'function'      => 'sendDataWithRx',
+                      'function-data' => {
+                        :controller     => 'provider_dialogs',
+                        :button         => :nsxt_delete_security_group,
+                        :modal_title    => N_('Remove Security Group'),
+                        :component_name => 'DeleteNsxtSecurityGroupForm'
+                      }
+                    },
                     :klass => ApplicationHelper::Button::BelongsToAnyNsxtNetworkManager
                   ),
                 ]

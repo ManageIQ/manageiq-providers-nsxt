@@ -17,11 +17,15 @@ module ManageIQ
                     'pficon pficon-add-circle-o fa-lg',
                     t = N_('Add Security Policy (NSX-T)'),
                     t,
-                    :data  => {'function'      => 'sendDataWithRx',
-                               'function-data' => {:controller     => 'provider_dialogs',
-                                                   :button         => :nsxt_create_security_policy,
-                                                   :modal_title    => N_('Add Security Policy (NSX-T)'),
-                                                   :component_name => 'CreateNsxtSecurityPolicyForm'}},
+                    :data => {
+                      'function'      => 'sendDataWithRx',
+                      'function-data' => {
+                        :controller     => 'provider_dialogs',
+                        :button         => :nsxt_create_security_policy,
+                        :modal_title    => N_('Add Security Policy (NSX-T)'),
+                        :component_name => 'CreateNsxtSecurityPolicyForm'
+                      }
+                    },
                     :klass => ApplicationHelper::Button::AnyNsxtProvider
                   )
                 ]

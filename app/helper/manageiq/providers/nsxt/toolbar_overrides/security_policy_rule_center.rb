@@ -17,11 +17,15 @@ module ManageIQ
                     'pficon pficon-edit fa-lg',
                     t = N_('Edit Security Policy Rule (NSX-T)'),
                     t,
-                    :data  => {'function'      => 'sendDataWithRx',
-                               'function-data' => {:controller     => 'provider_dialogs',
-                                                   :button         => :nsxt_update_security_policy_rule,
-                                                   :modal_title    => N_('Update Security Policy Rule (NSX-T)'),
-                                                   :component_name => 'UpdateNsxtSecurityPolicyRuleForm'}},
+                    :data => {
+                      'function'      => 'sendDataWithRx',
+                      'function-data' => {
+                        :controller     => 'provider_dialogs',
+                        :button         => :nsxt_update_security_policy_rule,
+                        :modal_title    => N_('Update Security Policy Rule (NSX-T)'),
+                        :component_name => 'UpdateNsxtSecurityPolicyRuleForm'
+                      }
+                    },
                     :klass => ApplicationHelper::Button::BelongsToAnyNsxtNetworkManager
                   ),
                   button(
@@ -29,11 +33,15 @@ module ManageIQ
                     'pficon pficon-delete fa-lg',
                     t = N_('Remove Security Policy Rule (NSX-T)'),
                     t,
-                    :data  => {'function'      => 'sendDataWithRx',
-                               'function-data' => {:controller     => 'provider_dialogs',
-                                                   :button         => :nsxt_delete_security_policy_rule,
-                                                   :modal_title    => N_('Remove Security Policy Rule'),
-                                                   :component_name => 'DeleteNsxtSecurityPolicyRuleForm'}},
+                    :data => {
+                      'function'      => 'sendDataWithRx',
+                      'function-data' => {
+                        :controller     => 'provider_dialogs',
+                        :button         => :nsxt_delete_security_policy_rule,
+                        :modal_title    => N_('Remove Security Policy Rule'),
+                        :component_name => 'DeleteNsxtSecurityPolicyRuleForm'
+                      }
+                    },
                     :klass => ApplicationHelper::Button::BelongsToAnyNsxtNetworkManager
                   ),
                 ]
