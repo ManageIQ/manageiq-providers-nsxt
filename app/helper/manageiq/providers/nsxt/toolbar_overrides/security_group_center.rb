@@ -17,7 +17,7 @@ module ManageIQ
                     'pficon pficon-edit fa-lg',
                     t = N_('Edit this Security Group (NSX-T)'),
                     t,
-                    :data => {
+                    :data  => {
                       'function'      => 'sendDataWithRx',
                       'function-data' => {
                         :controller     => 'provider_dialogs',
@@ -33,7 +33,7 @@ module ManageIQ
                     'pficon pficon-delete fa-lg',
                     t = N_('Remove this Security Group (NSX-T)'),
                     t,
-                    :data => {
+                    :data  => {
                       'function'      => 'sendDataWithRx',
                       'function-data' => {
                         :controller     => 'provider_dialogs',

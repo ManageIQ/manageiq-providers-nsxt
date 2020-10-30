@@ -17,7 +17,7 @@ module ManageIQ
                     'pficon pficon-edit fa-lg',
                     t = N_('Edit this Cloud Network (NSX-T)'),
                     t,
-                    :data => {
+                    :data  => {
                       'function'      => 'sendDataWithRx',
                       'function-data' => {
                         :controller     => 'provider_dialogs',
@@ -33,7 +33,7 @@ module ManageIQ
                     'pficon pficon-delete fa-lg',
                     t = N_('Delete this Cloud Network'),
                     t,
-                    :data => {
+                    :data  => {
                       'function'      => 'sendDataWithRx',
                       'function-data' => {
                         :controller     => 'provider_dialogs',

@@ -17,7 +17,7 @@ module ManageIQ
                     'pficon pficon-add-circle-o fa-lg',
                     t = N_('Add Security Policy Rule (NSX-T)'),
                     t,
-                    :data => {'function'      => 'sendDataWithRx',
+                    :data  => {'function'      => 'sendDataWithRx',
                                'function-data' => {:controller     => 'provider_dialogs',
                                                    :button         => :nsxt_create_security_policy_rule,
                                                    :modal_title    => N_('Add Security Policy Rule (NSX-T)'),

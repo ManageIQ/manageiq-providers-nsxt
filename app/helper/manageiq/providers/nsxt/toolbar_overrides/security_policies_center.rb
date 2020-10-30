@@ -17,7 +17,7 @@ module ManageIQ
                     'pficon pficon-add-circle-o fa-lg',
                     t = N_('Add Security Policy (NSX-T)'),
                     t,
-                    :data => {
+                    :data  => {
                       'function'      => 'sendDataWithRx',
                       'function-data' => {
                         :controller     => 'provider_dialogs',
