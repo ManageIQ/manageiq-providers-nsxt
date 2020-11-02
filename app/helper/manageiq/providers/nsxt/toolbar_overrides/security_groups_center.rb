@@ -26,7 +26,7 @@ module ManageIQ
                         :component_name => 'CreateNsxtSecurityGroupForm'
                       }
                     },
-                    :klass => ApplicationHelper::Button::AnyNsxtProvider
+                    :klass => ApplicationHelper::Button::AnyNsxtNetworkManager
                   )
                 ]
               )

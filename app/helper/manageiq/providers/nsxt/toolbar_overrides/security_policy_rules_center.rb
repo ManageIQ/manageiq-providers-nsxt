@@ -22,7 +22,7 @@ module ManageIQ
                                                    :button         => :nsxt_create_security_policy_rule,
                                                    :modal_title    => N_('Add Security Policy Rule (NSX-T)'),
                                                    :component_name => 'CreateNsxtSecurityPolicyRuleForm'}},
-                    :klass => ApplicationHelper::Button::AnyNsxtProvider
+                    :klass => ApplicationHelper::Button::AnyNsxtNetworkManager
                   )
                 ]
               )
