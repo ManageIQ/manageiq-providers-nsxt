@@ -26,7 +26,7 @@ module ManageIQ
                         :component_name => 'UpdateNsxtCloudNetworkForm'
                       }
                     },
-                    :klass => ApplicationHelper::Button::BelongsToAnyNsxtNetworkManager
+                    :klass => ApplicationHelper::Button::BelongsToNsxtNetworkManager
                   ),
                   button(
                     :cloud_network_delete,
@@ -42,7 +42,7 @@ module ManageIQ
                         :component_name => 'DeleteNsxtCloudNetworkForm'
                       }
                     },
-                    :klass => ApplicationHelper::Button::BelongsToAnyNsxtNetworkManager
+                    :klass => ApplicationHelper::Button::BelongsToNsxtNetworkManager
                   ),
                 ]
               )

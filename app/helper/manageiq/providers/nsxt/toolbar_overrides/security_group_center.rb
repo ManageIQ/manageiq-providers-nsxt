@@ -26,7 +26,7 @@ module ManageIQ
                         :component_name => 'UpdateNsxtSecurityGroupForm'
                       }
                     },
-                    :klass => ApplicationHelper::Button::BelongsToAnyNsxtNetworkManager
+                    :klass => ApplicationHelper::Button::BelongsToNsxtNetworkManager
                   ),
                   button(
                     :security_group_delete,
@@ -42,7 +42,7 @@ module ManageIQ
                         :component_name => 'DeleteNsxtSecurityGroupForm'
                       }
                     },
-                    :klass => ApplicationHelper::Button::BelongsToAnyNsxtNetworkManager
+                    :klass => ApplicationHelper::Button::BelongsToNsxtNetworkManager
                   ),
                 ]
               )

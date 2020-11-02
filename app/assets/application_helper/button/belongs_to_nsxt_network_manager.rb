@@ -1,4 +1,4 @@
-class ApplicationHelper::Button::BelongsToAnyNsxtNetworkManager < ApplicationHelper::Button::Basic
+class ApplicationHelper::Button::BelongsToNsxtNetworkManager < ApplicationHelper::Button::Basic
   needs(:@record)
 
   def visible?

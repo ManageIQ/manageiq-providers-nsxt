@@ -26,7 +26,7 @@ module ManageIQ
                         :component_name => 'UpdateNsxtSecurityPolicyForm'
                       }
                     },
-                    :klass => ApplicationHelper::Button::BelongsToAnyNsxtNetworkManager
+                    :klass => ApplicationHelper::Button::BelongsToNsxtNetworkManager
                   ),
                   button(
                     :nsxt_security_policy_delete,
@@ -42,7 +42,7 @@ module ManageIQ
                         :component_name => 'DeleteNsxtSecurityPolicyForm'
                       }
                     },
-                    :klass => ApplicationHelper::Button::BelongsToAnyNsxtNetworkManager
+                    :klass => ApplicationHelper::Button::BelongsToNsxtNetworkManager
                   ),
                   button(
                     :nsxt_security_policy_rule_new,
@@ -58,7 +58,7 @@ module ManageIQ
                         :component_name => 'CreateNsxtSecurityPolicyRuleForm'
                       }
                     },
-                    :klass => ApplicationHelper::Button::BelongsToAnyNsxtNetworkManager
+                    :klass => ApplicationHelper::Button::BelongsToNsxtNetworkManager
                   ),
                 ]
               )
