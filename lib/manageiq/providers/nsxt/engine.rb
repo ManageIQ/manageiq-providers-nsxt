@@ -13,6 +13,14 @@ module ManageIQ
         def self.plugin_name
           _('VMware NSX-T Provider')
         end
+
+        def self.init_loggers
+          $nsxt_log ||= Vmdb::Loggers.create_logger("nsxt.log")
+        end
+
+        def self.apply_logger_config(config)
+          Vmdb::Loggers.apply_config_value(config, $nsxt_log, :level_nsxt)
+        end
       end
     end
   end
