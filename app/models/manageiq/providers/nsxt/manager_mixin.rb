@@ -47,13 +47,14 @@ module ManageIQ::Providers::Nsxt::ManagerMixin
                 :validationDependencies => %w[type zone_id],
                 :fields                 => [
                   {
-                    :component  => "select",
-                    :id         => "endpoints.default.security_protocol",
-                    :name       => "endpoints.default.security_protocol",
-                    :label      => _("Security Protocol"),
-                    :isRequired => true,
-                    :validate   => [{:type => "required"}],
-                    :options    => [
+                    :component    => "select",
+                    :id           => "endpoints.default.security_protocol",
+                    :name         => "endpoints.default.security_protocol",
+                    :label        => _("Security Protocol"),
+                    :isRequired   => true,
+                    :initialValue => 'ssl-with-validation',
+                    :validate     => [{:type => "required"}],
+                    :options      => [
                       {
                         :label => _("SSL without validation"),
                         :value => "ssl-no-validation"
