@@ -5,7 +5,7 @@ module ManageIQ::Providers
     end
 
     def post_process_refresh_classes
-      []
+      [CloudTenant]
     end
   end
 end
