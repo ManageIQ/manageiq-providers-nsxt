@@ -58,8 +58,8 @@ class ManageIQ::Providers::Nsxt::Inventory::Parser::NetworkManager < ManageIQ::P
       cloud_network.cloud_tenant = cloud_tenant(segment['tags'])
       cloud_network.status = 'active'
       cloud_network.enabled = true
-      network_router_id = segment['connectivity_path']&.split('/global-infra/tier-1s/')&.last
-      network_router = persister.network_routers.find(network_router_id)
+      network_router_id = segment['connectivity_path']&.split('/tier-1s/')&.last
+      network_router = persister.network_routers.lazy_find(network_router_id) unless network_router_id.nil?
       cloud_subnets(segment, network_router)
     end
   end
@@ -190,7 +190,7 @@ class ManageIQ::Providers::Nsxt::Inventory::Parser::NetworkManager < ManageIQ::P
       security_policy_rule.action = rule['action']
       security_policy_rule.direction = rule['direction']
       security_policy_rule.ip_protocol = rule['ip_protocol']
-      security_policy_rule.sources_excluded = rule['sources_excluded'] || false
+      security_policy_rule.sources_excluded = rule['sources_excluded'].present? ? rule['sources_excluded'] : false
       security_policy_rule.source_security_groups = [] if security_policy_rule.source_security_groups.nil?
       rule['source_groups'].each do |group|
         next if group == 'ANY'
@@ -198,7 +198,7 @@ class ManageIQ::Providers::Nsxt::Inventory::Parser::NetworkManager < ManageIQ::P
         security_group = persister.security_groups.lazy_find(group.split('/groups/').last)
         security_policy_rule.source_security_groups << security_group unless security_group.nil?
       end
-      security_policy_rule.destinations_excluded = rule['destinations_excluded'] || false
+      security_policy_rule.destinations_excluded = rule['destinations_excluded'].present? ? rule['destinations_excluded'] : false
       security_policy_rule.destination_security_groups = [] if security_policy_rule.destination_security_groups.nil?
       rule['destination_groups'].each do |group|
         next if group == 'ANY'
