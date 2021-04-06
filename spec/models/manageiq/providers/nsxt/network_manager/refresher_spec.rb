@@ -101,7 +101,7 @@ describe ManageIQ::Providers::Nsxt::NetworkManager::Refresher do
       )
 
       expect(network_router.cloud_subnets.count).to eq(2)
-      expect(network_router.cloud_subnets.pluck(:ems_ref)).to include("d5204c40-6a90-11ea-a5b5-f9815823238c-192.168.12.1/24")
+      expect(network_router.cloud_subnets.pluck(:ems_ref)).to include("d5204c40-6a90-11ea-a5b5-f9815823238c-192.168.12.0/24")
     end
 
     def assert_specific_security_group
