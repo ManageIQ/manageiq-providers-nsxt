@@ -19,7 +19,8 @@ class ManageIQ::Providers::Nsxt::Inventory::Parser::NetworkManager < ManageIQ::P
 
   def network_service_entries(service, network_service)
     service['service_entries'].each do |service_entry|
-      network_service_entry = persister.network_service_entries.find_or_build("#{service['id']}-#{service_entry['unique_id']}")
+      service_entry_id = service_entry['unique_id'] || service_entry['id']
+      network_service_entry = persister.network_service_entries.find_or_build("#{service['id']}-#{service_entry_id}")
       network_service_entry.name = service_entry['display_name']
       network_service_entry.network_service = network_service
       if service_entry['resource_type'] == 'L4PortSetServiceEntry'
@@ -37,7 +38,7 @@ class ManageIQ::Providers::Nsxt::Inventory::Parser::NetworkManager < ManageIQ::P
   end
 
   def network_service_entry_ports(ports)
-    return ports&.join(',')
+    return if ports.empty? ? 'ANY' : ports.join(',')
   end
 
   def network_routers
