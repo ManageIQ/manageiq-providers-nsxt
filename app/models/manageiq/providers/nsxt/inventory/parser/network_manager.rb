@@ -38,7 +38,8 @@ class ManageIQ::Providers::Nsxt::Inventory::Parser::NetworkManager < ManageIQ::P
   end
 
   def network_service_entry_ports(ports)
-    return if ports.empty? ? 'ANY' : ports.join(',')
+    return 'ANY' if ports.empty?
+    return ports.join(',')
   end
 
   def network_routers
