@@ -191,28 +191,16 @@ class ManageIQ::Providers::Nsxt::Inventory::Parser::NetworkManager < ManageIQ::P
       security_policy_rule.direction = rule['direction']
       security_policy_rule.ip_protocol = rule['ip_protocol']
       security_policy_rule.sources_excluded = rule['sources_excluded'].present? ? rule['sources_excluded'] : false
-      security_policy_rule.source_security_groups = [] if security_policy_rule.source_security_groups.nil?
-      rule['source_groups'].each do |group|
-        next if group == 'ANY'
-
-        security_group = persister.security_groups.lazy_find(group.split('/groups/').last)
-        security_policy_rule.source_security_groups << security_group unless security_group.nil?
-      end
       security_policy_rule.destinations_excluded = rule['destinations_excluded'].present? ? rule['destinations_excluded'] : false
-      security_policy_rule.destination_security_groups = [] if security_policy_rule.destination_security_groups.nil?
-      rule['destination_groups'].each do |group|
-        next if group == 'ANY'
-
-        security_group = persister.security_groups.lazy_find(group.split('/groups/').last)
-        security_policy_rule.destination_security_groups << security_group unless security_group.nil?
-      end
-      security_policy_rule.network_services = [] if security_policy_rule.network_services.nil?
-      rule['services'].each do |service|
-        next if service == 'ANY'
-
-        network_service = persister.network_services.lazy_find(service.split('/services/').last)
-        security_policy_rule.network_services << network_service unless network_service.nil?
-      end
+      security_policy_rule.source_security_groups = rule['source_groups']
+        .map{|group| persister.security_groups.lazy_find(group.split('/groups/').last)}
+        .compact
+      security_policy_rule.destination_security_groups = rule['destination_groups']
+        .map{|group| persister.security_groups.lazy_find(group.split('/groups/').last)}
+        .compact
+      security_policy_rule.network_services = rule['services']
+        .map{|service| persister.network_services.lazy_find(service.split('/services/').last)}
+        .compact
     end
   end
 
