@@ -8,7 +8,7 @@ class ManageIQ::Providers::Nsxt::NsxtClient
     @user = user
     @password = password
     @client = Rest.new(server, user, password, verify_ssl)
-    connected, data = @client.login
+    connected = @client.login
     return if connected
 
     raise 'NSX-T Authentication failed'

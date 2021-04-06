@@ -85,8 +85,8 @@ class ManageIQ::Providers::Nsxt::Inventory::Parser::NetworkManager < ManageIQ::P
   #   # TODO: this depends on vm.instance_uuid which doesn't exist yet
   #   Lan.where(:ems_ref => segment['id']).each do |lan|
   #     lan.vms.each do |vm|
-  #       return if cloud_subnet&.cloud_tenant&.source_tenant.nil?
-  #       return if vm.tenant_id != cloud_subnet.cloud_tenant.source_tenant.id
+  #       next if cloud_subnet&.cloud_tenant&.source_tenant.nil?
+  #       next if vm.tenant_id != cloud_subnet.cloud_tenant.source_tenant.id
   #       network_port = persister.network_ports.find_or_build("#{segment['id']}_#{vm.instance_uuid}")
   #       network_port.name = vm.name
   #       network_port.device = vm

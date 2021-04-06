@@ -12,7 +12,6 @@ class ManageIQ::Providers::Nsxt::NsxtClient::Rest
     RestClient::Request.execute(:method => :get, :url => @login_url, :user => @user, :password => @password, :verify_ssl => @verify_ssl) do |response|
       case response.code
       when 200
-        data = JSON.parse(response.body)
         return true
       when 403
         raise MiqException::MiqInvalidCredentialsError, "Login failed due to a bad username or password."
