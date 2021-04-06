@@ -77,14 +77,14 @@ describe ManageIQ::Providers::Nsxt::NetworkManager::Refresher do
     end
 
     def assert_specific_cloud_subnet
-      cloud_subnet = ems.cloud_subnets.find_by(:ems_ref => "d5204c40-6a90-11ea-a5b5-f9815823238c-192.168.12.1/24")
+      cloud_subnet = ems.cloud_subnets.find_by(:ems_ref => "d5204c40-6a90-11ea-a5b5-f9815823238c-192.168.12.0/24")
 
       expect(cloud_subnet).to have_attributes(
-        :name         => "192.168.12.0-192.168.12.1/24",
-        :ems_ref      => "d5204c40-6a90-11ea-a5b5-f9815823238c-192.168.12.1/24",
+        :name         => "192.168.12.0-192.168.12.0/24",
+        :ems_ref      => "d5204c40-6a90-11ea-a5b5-f9815823238c-192.168.12.0/24",
         :cidr         => "192.168.12.0/24",
         :dhcp_enabled => false,
-        :gateway      => "192.168.12.1/24",
+        :gateway      => "192.168.12.1",
         :type         => "ManageIQ::Providers::Nsxt::NetworkManager::CloudSubnet",
       )
 
