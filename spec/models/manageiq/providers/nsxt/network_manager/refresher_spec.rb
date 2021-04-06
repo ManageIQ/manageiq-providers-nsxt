@@ -31,8 +31,8 @@ describe ManageIQ::Providers::Nsxt::NetworkManager::Refresher do
     end
 
     def assert_table_counts
-      expect(CloudNetwork.count).to        eq(39)
-      expect(CloudSubnet.count).to         eq(32)
+      expect(CloudNetwork.count).to        eq(32)
+      expect(CloudSubnet.count).to         eq(33)
       expect(NetworkService.count).to      eq(410)
       expect(NetworkServiceEntry.count).to eq(802)
       expect(NetworkRouter.count).to       eq(10)
@@ -77,14 +77,14 @@ describe ManageIQ::Providers::Nsxt::NetworkManager::Refresher do
     end
 
     def assert_specific_cloud_subnet
-      cloud_subnet = ems.cloud_subnets.find_by(:ems_ref => "d5204c40-6a90-11ea-a5b5-f9815823238c-192.168.12.1/24")
+      cloud_subnet = ems.cloud_subnets.find_by(:ems_ref => "d5204c40-6a90-11ea-a5b5-f9815823238c-192.168.12.0/24")
 
       expect(cloud_subnet).to have_attributes(
-        :name         => "192.168.12.0-192.168.12.1/24",
-        :ems_ref      => "d5204c40-6a90-11ea-a5b5-f9815823238c-192.168.12.1/24",
+        :name         => "192.168.12.0-192.168.12.0/24",
+        :ems_ref      => "d5204c40-6a90-11ea-a5b5-f9815823238c-192.168.12.0/24",
         :cidr         => "192.168.12.0/24",
         :dhcp_enabled => false,
-        :gateway      => "192.168.12.1/24",
+        :gateway      => "192.168.12.1",
         :type         => "ManageIQ::Providers::Nsxt::NetworkManager::CloudSubnet",
       )
 
@@ -101,7 +101,7 @@ describe ManageIQ::Providers::Nsxt::NetworkManager::Refresher do
       )
 
       expect(network_router.cloud_subnets.count).to eq(2)
-      expect(network_router.cloud_subnets.pluck(:ems_ref)).to include("d5204c40-6a90-11ea-a5b5-f9815823238c-192.168.12.1/24")
+      expect(network_router.cloud_subnets.pluck(:ems_ref)).to include("d5204c40-6a90-11ea-a5b5-f9815823238c-192.168.12.0/24")
     end
 
     def assert_specific_security_group
