@@ -49,9 +49,22 @@ const security_zone_options = [
   }
 ];
 
-export default () => {
+const loadProviders = () => API.get("/api/providers?collection_class=ManageIQ::Providers::Nsxt::NetworkManager").then(({ resources }) =>
+  resources.map(({ id: value, name: label }) => ({ label, value }))
+);
+
+export default (edit) => {
   const schema = {
     fields: [
+      {...(edit ? {} : {
+        component: componentTypes.SELECT,
+        id: 'ems_id',
+        name: 'ems_id',
+        label: __('Provider'),
+        isRequired: true,
+        loadOptions: loadProviders,
+        validate: [{ type: validatorTypes.REQUIRED }],
+      })},
       {
         component: componentTypes.TEXT_FIELD,
         id: 'name',
