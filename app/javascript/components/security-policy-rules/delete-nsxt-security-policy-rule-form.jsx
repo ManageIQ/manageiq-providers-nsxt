@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { Modal } from 'patternfly-react';
+import { ModalBody } from 'carbon-components-react';
 import { SecurityPolicyRuleApi } from '../../utils/security-policy-rule-api';
 
 class DeleteNsxtSecurityPolicyRuleForm extends React.Component {
@@ -52,12 +52,12 @@ class DeleteNsxtSecurityPolicyRuleForm extends React.Component {
   render() {
     if (this.state.loading) return null;
     return (
-      <Modal.Body className="warning-modal-body">
+      <ModalBody className="warning-modal-body">
         <div>
           <h2>{this.state.values.name}</h2>
           <h4>{this.state.message}</h4>
         </div>
-      </Modal.Body>
+      </ModalBody>
     );
   }
 }
