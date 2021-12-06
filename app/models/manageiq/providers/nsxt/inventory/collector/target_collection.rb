@@ -34,10 +34,4 @@ class ManageIQ::Providers::Nsxt::Inventory::Collector::TargetCollection < Manage
   def security_policy_rules(id)
     connection.get_security_policy_rules(id)
   end
-
-  private
-
-  def references(collection)
-    target.manager_refs_by_association.try(:[], collection).try(:[], :ems_ref).try(:to_a) || []
-  end
 end
