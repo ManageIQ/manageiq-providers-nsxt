@@ -11,9 +11,9 @@ class ManageIQ::Providers::Nsxt::NetworkManager < ManageIQ::Providers::NetworkMa
   require_nested :SecurityPolicy
   require_nested :SecurityPolicyRule
 
-  supports :ems_network_new
   supports :cloud_tenant_mapping
   supports :create
+  supports :update
 
   include SupportsFeatureMixin
   include ManageIQ::Providers::Nsxt::ManagerMixin
