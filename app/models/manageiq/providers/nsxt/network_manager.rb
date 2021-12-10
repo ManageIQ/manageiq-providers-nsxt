@@ -11,8 +11,9 @@ class ManageIQ::Providers::Nsxt::NetworkManager < ManageIQ::Providers::NetworkMa
   require_nested :SecurityPolicy
   require_nested :SecurityPolicyRule
 
-  supports :ems_network_new
   supports :cloud_tenant_mapping
+  supports :create
+  supports :update
 
   include SupportsFeatureMixin
   include ManageIQ::Providers::Nsxt::ManagerMixin
@@ -23,10 +24,6 @@ class ManageIQ::Providers::Nsxt::NetworkManager < ManageIQ::Providers::NetworkMa
 
   def self.description
     @description ||= "VMware NSX-T Network Manager".freeze
-  end
-
-  def self.supported_for_create?
-    true
   end
 
   def name
