@@ -12,7 +12,7 @@ module ManageIQ::Providers::Nsxt::Inventory::Persister::Definitions::NetworkColl
        network_ports
        network_services
        network_service_entries).each do |name|
-    
+
       add_collection(network, name) do |builder|
         builder.add_properties(:parent => manager) # including targeted
       end
@@ -22,7 +22,7 @@ module ManageIQ::Providers::Nsxt::Inventory::Persister::Definitions::NetworkColl
   end
 
   def add_cross_provider_vms
-    add_collection(cloud, :vms) do |builder|
+    add_collection(cloud, :vms, {}, {:without_sti => true}) do |builder|
       builder.add_properties(
         :arel           => Vm.all,
         :strategy       => :local_db_find_references,
