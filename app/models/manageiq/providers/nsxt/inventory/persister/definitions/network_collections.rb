@@ -16,18 +16,5 @@ module ManageIQ::Providers::Nsxt::Inventory::Persister::Definitions::NetworkColl
     ].each do |name|
       add_network_collection(name)
     end
-
-    add_cross_provider_vms
-  end
-
-  def add_cross_provider_vms
-    add_collection(cloud, :vms, {}, {:without_sti => true}) do |builder|
-      builder.add_properties(
-        :arel           => Vm.all,
-        :strategy       => :local_db_find_references,
-        :association    => nil,
-        :secondary_refs => { :by_uid_ems => %i(uid_ems) }
-      )
-    end
   end
 end
