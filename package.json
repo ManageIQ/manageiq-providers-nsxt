@@ -38,8 +38,8 @@
     "enzyme-to-json": "^3.3.4"
   },
   "engines": {
-    "node": ">= 6.9.1",
-    "npm": ">= 3.10.3"
+    "node": ">= 16.0.0",
+    "npm": ">= 8.0.0"
   },
   "packageManager": "yarn@3.0.2"
 }
