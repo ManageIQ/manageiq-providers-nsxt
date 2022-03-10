@@ -1,13 +1,17 @@
-require 'rest-client'
 require 'rubygems'
 require 'json'
+
 class ManageIQ::Providers::Nsxt::NsxtClient
   include Vmdb::Logging
+
   def initialize(server, path, user, password, verify_ssl = false)
+    require 'rest-client'
+
     @base_url = "#{server}/#{path}"
-    @user = user
+    @user     = user
     @password = password
-    @client = Rest.new(server, user, password, verify_ssl)
+    @client   = Rest.new(server, user, password, verify_ssl)
+
     connected = @client.login
     return if connected
 
