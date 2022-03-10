@@ -1,5 +1,3 @@
-require 'rest-client'
-
 module ManageIQ::Providers::Nsxt::ManagerMixin
   extend ActiveSupport::Concern
 
