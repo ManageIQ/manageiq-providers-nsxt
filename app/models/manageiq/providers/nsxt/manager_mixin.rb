@@ -22,7 +22,7 @@ module ManageIQ::Providers::Nsxt::ManagerMixin
     end
 
     def params_for_create
-      @params_for_create ||= {
+      {
         :fields => [
           {
             :component => 'switch',
