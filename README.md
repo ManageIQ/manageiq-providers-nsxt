@@ -1,12 +1,12 @@
 # ManageIQ::Providers::Nsxt
 
-[![CI](https://github.com/ManageIQ/manageiq-providers-nsxt/actions/workflows/ci.yaml/badge.svg)](https://github.com/ManageIQ/manageiq-providers-nsxt/actions/workflows/ci.yaml)
+[![CI](https://github.com/ManageIQ/manageiq-providers-nsxt/actions/workflows/ci.yaml/badge.svg?branch=petrosian)](https://github.com/ManageIQ/manageiq-providers-nsxt/actions/workflows/ci.yaml)
 [![Maintainability](https://api.codeclimate.com/v1/badges/5a85697f338a65a3cfff/maintainability)](https://codeclimate.com/github/ManageIQ/manageiq-providers-nsxt/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/5a85697f338a65a3cfff/test_coverage)](https://codeclimate.com/github/ManageIQ/manageiq-providers-nsxt/test_coverage)
 
 [![Chat](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/ManageIQ/manageiq-providers-nsxt?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
-[![Build history for master branch](https://buildstats.info/github/chart/ManageIQ/manageiq-providers-nsxt?branch=master&buildCount=50&includeBuildsFromPullRequest=false&showstats=false)](https://github.com/ManageIQ/manageiq-providers-nsxt/actions?query=branch%3Amaster)
+[![Build history for petrosian branch](https://buildstats.info/github/chart/ManageIQ/manageiq-providers-nsxt?branch=petrosian&buildCount=50&includeBuildsFromPullRequest=false&showstats=false)](https://github.com/ManageIQ/manageiq-providers-nsxt/actions?query=branch%3Amaster)
 
 ManageIQ plugin for the VMware NSX-T provider.
 
