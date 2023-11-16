@@ -41,7 +41,7 @@
     "node": ">= 18.0.0",
     "npm": ">= 8.6.0"
   },
-  "packageManager": "yarn@4.0.0-rc.51",
+  "packageManager": "yarn@4.0.2",
   "resolutions": {
     "es-abstract": "~1.21.3"
   }
