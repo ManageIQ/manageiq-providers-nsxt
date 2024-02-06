@@ -1,16 +1,4 @@
 class ManageIQ::Providers::Nsxt::NetworkManager < ManageIQ::Providers::NetworkManager
-  require_nested :CloudNetwork
-  require_nested :CloudSubnet
-  require_nested :NetworkPort
-  require_nested :NetworkRouter
-  require_nested :NetworkService
-  require_nested :NetworkServiceEntry
-  require_nested :RefreshWorker
-  require_nested :Refresher
-  require_nested :SecurityGroup
-  require_nested :SecurityPolicy
-  require_nested :SecurityPolicyRule
-
   supports :cloud_tenant_mapping
   supports :create
   supports :update

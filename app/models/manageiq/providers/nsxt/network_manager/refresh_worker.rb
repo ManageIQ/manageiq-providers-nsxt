@@ -1,6 +1,4 @@
 class ManageIQ::Providers::Nsxt::NetworkManager::RefreshWorker < ManageIQ::Providers::BaseManager::RefreshWorker
-  require_nested :Runner
-
   def self.ems_class
     ManageIQ::Providers::Nsxt::NetworkManager
   end
