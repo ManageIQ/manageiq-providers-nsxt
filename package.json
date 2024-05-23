@@ -53,8 +53,5 @@
     "roots": [
       "<rootDir>/spec/javascript"
     ]
-  },
-  "resolutions": {
-    "ip": "2.0.1"
   }
 }
