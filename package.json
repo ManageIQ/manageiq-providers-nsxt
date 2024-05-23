@@ -43,7 +43,6 @@
   },
   "packageManager": "yarn@4.2.2",
   "resolutions": {
-    "es-abstract": "~1.21.3",
-    "ip": "2.0.1"
+    "es-abstract": "~1.21.3"
   }
 }
