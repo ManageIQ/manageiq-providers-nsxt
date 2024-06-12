@@ -2041,14 +2041,14 @@ __metadata:
   linkType: hard
 
 "react-final-form@npm:^6.3.3":
-  version: 6.5.7
-  resolution: "react-final-form@npm:6.5.7"
+  version: 6.5.9
+  resolution: "react-final-form@npm:6.5.9"
   dependencies:
     "@babel/runtime": "npm:^7.15.4"
   peerDependencies:
-    final-form: 4.20.4
-    react: ^16.8.0 || ^17.0.0
-  checksum: 10/dba0a26f78b5a8d193df42e4b95991870217992f7d4ae46ff404a4a5de769889eeec8012a08230e90ad20b9b8acf21b1d528f573d930fa77dc980eb7761f2fca
+    final-form: ^4.20.4
+    react: ^16.8.0 || ^17.0.0 || ^18.0.0
+  checksum: 10/200e48771abad9c23a680de9793c7e62ef4aea1d577e1d63fa0fe55c8db147d0a0e8b2258801f9909863e73a86f77f0ff9d8bb7b2016258750d5bb5c35d3f763
   languageName: node
   linkType: hard
 
