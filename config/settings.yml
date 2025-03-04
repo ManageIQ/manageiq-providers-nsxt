@@ -1,7 +1,6 @@
 ---
 :ems:
   :ems_nsxt:
-    :blacklisted_event_names: []
     :event_handling:
       :event_groups:
 :ems_refresh:
