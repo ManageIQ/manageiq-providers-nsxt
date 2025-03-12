@@ -1363,11 +1363,11 @@ __metadata:
   linkType: hard
 
 "final-form@npm:^4.18.6":
-  version: 4.20.4
-  resolution: "final-form@npm:4.20.4"
+  version: 4.20.10
+  resolution: "final-form@npm:4.20.10"
   dependencies:
     "@babel/runtime": "npm:^7.10.0"
-  checksum: 10/67bc1cbfdf137e48972fe5f870d71a169f6802d525bb9d62e0f3e5692fd64c078822e88fc6a6baa7bb0d0f1f9ae54ab1988daea9f887e7409bc96d57993338d9
+  checksum: 10/2df45a96bcd5b6f55256872f3d8f24ab893447974bb6b43a3240acea35280839d653c6e39c356c13e5a09557622af163b76004fc57b21f028718abc20408efa6
   languageName: node
   linkType: hard
 
