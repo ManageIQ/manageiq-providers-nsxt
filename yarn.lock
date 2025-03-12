@@ -2110,11 +2110,11 @@ __metadata:
   linkType: hard
 
 "redux@npm:^4.0.0":
-  version: 4.1.2
-  resolution: "redux@npm:4.1.2"
+  version: 4.2.1
+  resolution: "redux@npm:4.2.1"
   dependencies:
     "@babel/runtime": "npm:^7.9.2"
-  checksum: 10/764a64692f7184fb373dd38bcddbe1581e2c9cd3766a3ad6a5c5d19177db1fb164240f07b97cef40d29a632620b6c5e3a08abd8ea912e4c232b2f31bbd2431e6
+  checksum: 10/371e4833b671193303a7dea7803c8fdc8e0d566740c78f580e0a3b77b4161da25037626900a2205a5d616117fa6ad09a4232e5a110bd437186b5c6355a041750
   languageName: node
   linkType: hard
 
