@@ -5,9 +5,9 @@ describe ManageIQ::Providers::Nsxt::NetworkManager::Refresher do
 
   context "#refresh" do
     let(:ems) do
-      hostname = Rails.application.secrets.nsxt[:hostname]
-      username = Rails.application.secrets.nsxt[:username]
-      password = Rails.application.secrets.nsxt[:password]
+      hostname = VcrSecrets.nsxt.hostname
+      username = VcrSecrets.nsxt.username
+      password = VcrSecrets.nsxt.password
 
       FactoryBot.create(:ems_nsxt_network, :hostname => hostname, :security_protocol => 'ssl', :endpoint_path => 'policy/api/v1/infra').tap do |ems|
         ems.authentications << FactoryBot.create(:authentication, :userid => username, :password => password)
