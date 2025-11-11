@@ -1,6 +1,6 @@
 # ManageIQ::Providers::Nsxt
 
-[![CI](https://github.com/ManageIQ/manageiq-providers-nsxt/actions/workflows/ci.yaml/badge.svg?branch=spassky)](https://github.com/ManageIQ/manageiq-providers-nsxt/actions/workflows/ci.yaml)
+[![CI](https://github.com/ManageIQ/manageiq-providers-nsxt/actions/workflows/ci.yaml/badge.svg?branch=master)](https://github.com/ManageIQ/manageiq-providers-nsxt/actions/workflows/ci.yaml)
 [![Maintainability](https://api.codeclimate.com/v1/badges/5a85697f338a65a3cfff/maintainability)](https://codeclimate.com/github/ManageIQ/manageiq-providers-nsxt/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/5a85697f338a65a3cfff/test_coverage)](https://codeclimate.com/github/ManageIQ/manageiq-providers-nsxt/test_coverage)
 
