@@ -2,6 +2,6 @@ class ApplicationHelper::Button::BelongsToNsxtNetworkManager < ApplicationHelper
   needs(:@record)
 
   def visible?
-    @record.class.parent == ManageIQ::Providers::Nsxt::NetworkManager
+    @record.class.module_parent == ManageIQ::Providers::Nsxt::NetworkManager
   end
 end
