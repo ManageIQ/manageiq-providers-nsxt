@@ -311,10 +311,10 @@ __metadata:
   languageName: node
   linkType: hard
 
-"babel-plugin-add-module-exports@npm:^0.2.1":
-  version: 0.2.1
-  resolution: "babel-plugin-add-module-exports@npm:0.2.1"
-  checksum: 10/4d527062f4e08a23d13e31b8f4fb928e936f0c0436241dda84d0d7c002995824a04bef30405874f51bdecf77c6663f9223e94c775e9bc5a119c1d9071190f3a0
+"babel-plugin-add-module-exports@npm:^1.0.0":
+  version: 1.0.4
+  resolution: "babel-plugin-add-module-exports@npm:1.0.4"
+  checksum: 10/abf38d71401adadc47cadb0e023562ac2c435e7be7d5d86890f1d74b703c3b4d7f1a80ba818fc799130a641d9dcbbc96bb568bd800e8efccdfb02c7ef8a3acc9
   languageName: node
   linkType: hard
 
@@ -1965,7 +1965,7 @@ __metadata:
   version: 0.0.0-use.local
   resolution: "manageiq-providers-nsxt@workspace:."
   dependencies:
-    babel-plugin-add-module-exports: "npm:^0.2.1"
+    babel-plugin-add-module-exports: "npm:^1.0.0"
     babel-plugin-syntax-dynamic-import: "npm:^6.18.0"
     babel-plugin-transform-class-properties: "npm:^6.24.1"
     babel-plugin-transform-export-extensions: "npm:^6.22.0"
