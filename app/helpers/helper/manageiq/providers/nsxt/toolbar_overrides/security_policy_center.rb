@@ -29,7 +29,7 @@ module ManageIQ
                     :klass => ApplicationHelper::Button::BelongsToNsxtNetworkManager
                   ),
                   button(
-                    :nsxt_security_policy_delete,
+                    :security_policy_delete,
                     'pficon pficon-delete fa-lg',
                     t = N_('Remove Security Policy (NSX-T)'),
                     t,
@@ -45,7 +45,7 @@ module ManageIQ
                     :klass => ApplicationHelper::Button::BelongsToNsxtNetworkManager
                   ),
                   button(
-                    :nsxt_security_policy_rule_new,
+                    :security_policy_rule_new,
                     'pficon pficon-add-circle-o fa-lg',
                     t = N_('Add Security Policy Rule (NSX-T)'),
                     t,
