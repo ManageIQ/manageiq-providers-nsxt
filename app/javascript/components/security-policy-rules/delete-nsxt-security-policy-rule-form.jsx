@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { ModalBody } from 'carbon-components-react';
+import { ModalBody } from '@carbon/react';
 import { SecurityPolicyRuleApi } from '../../utils/security-policy-rule-api';
 
 class DeleteNsxtSecurityPolicyRuleForm extends React.Component {

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-import { ModalBody } from 'carbon-components-react';
+import { ModalBody } from '@carbon/react';
 import { CloudNetworkApi } from '../../utils/cloud-network-api';
 
 class DeleteNsxtCloudNetworkForm extends React.Component {
